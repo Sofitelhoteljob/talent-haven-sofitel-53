@@ -11,9 +11,14 @@ export const Footer = () => {
             <h3 className="font-playfair text-lg font-semibold mb-6">Professional Solutions</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/business-travel" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://businesstravel.accor.com/en.html" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Business Travel
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/meetings-events" className="text-muted-foreground hover:text-primary transition-colors">
