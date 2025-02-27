@@ -116,9 +116,14 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/android-app" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://play.google.com/store/apps/details?id=com.accor.appli.hybrid&hl=fr&referrer=mat_click_id%3Dca6a7d28948a4be0a58f9e7135eb3b82-20220412-14012%26link_click_id%3D1042332595720954781&mat_click_id=ca6a7d28948a4be0a58f9e7135eb3b82-20220412-14012" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Android app
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
