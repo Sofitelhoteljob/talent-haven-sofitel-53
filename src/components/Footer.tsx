@@ -89,11 +89,6 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
-                  Careers
-                </Link>
-              </li>
-              <li>
                 <a 
                   href="https://all.accor.com/a/en/sustainability.html" 
                   target="_blank" 
@@ -102,16 +97,6 @@ export const Footer = () => {
                 >
                   Sustainable Development
                 </a>
-              </li>
-              <li>
-                <Link to="/affiliate" className="text-muted-foreground hover:text-primary transition-colors">
-                  Affiliate programme
-                </Link>
-              </li>
-              <li>
-                <Link to="/residences" className="text-muted-foreground hover:text-primary transition-colors">
-                  Residences
-                </Link>
               </li>
             </ul>
           </div>
