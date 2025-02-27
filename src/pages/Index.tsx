@@ -146,12 +146,15 @@ const Index = () => {
                 description: "Be part of Accor's worldwide hospitality network"
               }
             ].map((benefit, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow animate-fade-in">
-                <div className="h-12 w-12 bg-secondary/10 rounded-full flex items-center justify-center mb-4">
-                  <benefit.icon className="h-6 w-6 text-secondary" />
+              <Card 
+                key={index} 
+                className="group p-6 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-gradient-to-br from-white to-secondary/5 animate-fade-in border-secondary/10"
+              >
+                <div className="h-14 w-14 bg-secondary/10 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <benefit.icon className="h-7 w-7 text-secondary group-hover:text-secondary/80" />
                 </div>
-                <h3 className="font-playfair text-xl font-semibold mb-2">{benefit.title}</h3>
-                <p className="text-muted-foreground">{benefit.description}</p>
+                <h3 className="font-playfair text-xl font-semibold mb-3 group-hover:text-secondary transition-colors">{benefit.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
               </Card>
             ))}
           </div>
