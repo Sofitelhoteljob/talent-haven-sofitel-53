@@ -52,9 +52,14 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://all.accor.com/gb/our-services/index.shtml" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   All our services
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
