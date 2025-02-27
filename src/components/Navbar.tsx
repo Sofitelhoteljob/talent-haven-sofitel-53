@@ -1,14 +1,19 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleApplyNow = () => {
+    window.location.href = 'https://careers.accor.com/global/en/sofitel-jobs';
   };
 
   return (
@@ -36,7 +41,7 @@ export const Navbar = () => {
             >
               About Us
             </a>
-            <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
+            <Link to="/contact" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               Contact
             </Link>
           </nav>
@@ -55,7 +60,10 @@ export const Navbar = () => {
 
           {/* Apply Button */}
           <div className="hidden md:block">
-            <Button className="bg-secondary hover:bg-secondary/90 text-white">
+            <Button 
+              className="bg-secondary hover:bg-secondary/90 text-white"
+              onClick={handleApplyNow}
+            >
               Apply Now
             </Button>
           </div>
@@ -91,7 +99,7 @@ export const Navbar = () => {
                 About Us
               </a>
               <Link 
-                to="#" 
+                to="/contact" 
                 className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -99,7 +107,10 @@ export const Navbar = () => {
               </Link>
               <Button 
                 className="bg-secondary hover:bg-secondary/90 text-white w-full mt-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  handleApplyNow();
+                }}
               >
                 Apply Now
               </Button>
