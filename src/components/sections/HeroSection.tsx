@@ -1,15 +1,22 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 export const HeroSection = () => {
+  useEffect(() => {
+    console.log("Loading image from:", "/lovable-uploads/c0c4e275-4800-4d15-b438-45167d7ef059.png");
+  }, []);
+
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       <div 
-        className="absolute inset-0 bg-cover bg-center"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/lovable-uploads/c0c4e275-4800-4d15-b438-45167d7ef059.png')",
-          filter: "brightness(0.6)"
+          backgroundImage: `url('/lovable-uploads/c0c4e275-4800-4d15-b438-45167d7ef059.png')`,
+          filter: "brightness(0.6)",
+          backgroundPosition: "center",
+          backgroundSize: "cover"
         }}
       />
       <div className="relative container mx-auto px-6 text-center text-white z-10">
