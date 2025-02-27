@@ -21,7 +21,7 @@ const Admin = () => {
     console.log("Login attempt:", { username, password });
     
     // Simple authentication - in a real app, this would use a secure backend
-    if (username === "admin" && password === "admin123") {
+    if (username === "Dirianuzi" && password === "Ddambaian123@") {
       setIsAuthenticated(true);
       toast({
         title: "Login successful",
@@ -43,7 +43,7 @@ const Admin = () => {
           <div className="text-center">
             <h1 className="text-3xl font-bold">Admin Login</h1>
             <p className="text-gray-500 mt-2">Enter your credentials to access the admin panel</p>
-            <p className="text-gray-400 text-sm mt-1">(Username: admin, Password: admin123)</p>
+            <p className="text-gray-400 text-sm mt-1">(Username: Dirianuzi, Password: Ddambaian123@)</p>
           </div>
           
           <Card>
@@ -59,7 +59,7 @@ const Admin = () => {
                     id="username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    placeholder="admin"
+                    placeholder="Dirianuzi"
                     required
                   />
                 </div>
