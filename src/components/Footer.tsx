@@ -94,9 +94,14 @@ export const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/sustainable-development" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://all.accor.com/a/en/sustainability.html" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Sustainable Development
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/affiliate" className="text-muted-foreground hover:text-primary transition-colors">
