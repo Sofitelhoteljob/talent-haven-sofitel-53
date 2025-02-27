@@ -79,9 +79,14 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/management" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://group.accor.com/en/brands/Luxury/sofitel" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Management & Franchises
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">
