@@ -29,9 +29,6 @@ export const Navbar = () => {
               Development Program
             </Link>
             <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
-              Careers
-            </Link>
-            <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               About Us
             </Link>
             <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
@@ -78,13 +75,6 @@ export const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Development Program
-              </Link>
-              <Link 
-                to="#" 
-                className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Careers
               </Link>
               <Link 
                 to="#" 
