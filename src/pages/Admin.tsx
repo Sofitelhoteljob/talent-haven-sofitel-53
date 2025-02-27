@@ -17,6 +17,9 @@ const Admin = () => {
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // For debugging
+    console.log("Login attempt:", { username, password });
+    
     // Simple authentication - in a real app, this would use a secure backend
     if (username === "admin" && password === "admin123") {
       setIsAuthenticated(true);
@@ -40,6 +43,7 @@ const Admin = () => {
           <div className="text-center">
             <h1 className="text-3xl font-bold">Admin Login</h1>
             <p className="text-gray-500 mt-2">Enter your credentials to access the admin panel</p>
+            <p className="text-gray-400 text-sm mt-1">(Username: admin, Password: admin123)</p>
           </div>
           
           <Card>
