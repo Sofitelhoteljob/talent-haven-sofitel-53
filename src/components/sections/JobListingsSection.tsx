@@ -1,10 +1,10 @@
-
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Department, EmploymentType, Job, Location } from "@/types/job";
 import { JobCard } from "@/components/JobCard";
 import { JobFilters } from "@/components/JobFilters";
 import { useToast } from "@/components/ui/use-toast";
+import { Button } from "@/components/ui/button";
 
 // Sample job data
 const JOBS: Job[] = [
@@ -114,6 +114,7 @@ export const JobListingsSection = () => {
   const [department, setDepartment] = useState<Department | 'All'>('All');
   const [location, setLocation] = useState<Location | 'All'>('All');
   const [employmentType, setEmploymentType] = useState<EmploymentType | 'All'>('All');
+  const [showAll, setShowAll] = useState(false);
 
   const handleApply = (jobId: string) => {
     toast({
@@ -131,6 +132,8 @@ export const JobListingsSection = () => {
 
     return matchesSearch && matchesDepartment && matchesLocation && matchesType;
   });
+
+  const displayedJobs = showAll ? filteredJobs : filteredJobs.slice(0, 3);
 
   return (
     <section className="py-20 bg-white">
@@ -155,8 +158,8 @@ export const JobListingsSection = () => {
         />
 
         <div className="mt-8 grid gap-6">
-          {filteredJobs.length > 0 ? (
-            filteredJobs.map((job) => (
+          {displayedJobs.length > 0 ? (
+            displayedJobs.map((job) => (
               <JobCard key={job.id} job={job} onApply={handleApply} />
             ))
           ) : (
@@ -165,6 +168,19 @@ export const JobListingsSection = () => {
             </div>
           )}
         </div>
+
+        {filteredJobs.length > 3 && (
+          <div className="mt-8 text-center">
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => setShowAll(!showAll)}
+              className="border-secondary text-secondary hover:bg-secondary hover:text-white"
+            >
+              {showAll ? "Show Less" : `Show More (${filteredJobs.length - 3} positions)`}
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
