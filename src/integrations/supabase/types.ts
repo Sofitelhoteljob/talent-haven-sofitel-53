@@ -119,6 +119,39 @@ export type Database = {
         }
         Relationships: []
       }
+      system_settings: {
+        Row: {
+          contact_email: string
+          created_at: string | null
+          export_format: string
+          id: string
+          include_personal_data: boolean | null
+          notification_enabled: boolean | null
+          site_name: string
+          updated_at: string | null
+        }
+        Insert: {
+          contact_email: string
+          created_at?: string | null
+          export_format: string
+          id: string
+          include_personal_data?: boolean | null
+          notification_enabled?: boolean | null
+          site_name: string
+          updated_at?: string | null
+        }
+        Update: {
+          contact_email?: string
+          created_at?: string | null
+          export_format?: string
+          id?: string
+          include_personal_data?: boolean | null
+          notification_enabled?: boolean | null
+          site_name?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -16,6 +16,18 @@ interface SystemSettings {
   notification_enabled: boolean;
 }
 
+// Type for the system_settings table row
+interface SystemSettingsRow {
+  id: string;
+  site_name: string;
+  contact_email: string;
+  export_format: string;
+  include_personal_data: boolean;
+  notification_enabled: boolean;
+  created_at?: string;
+  updated_at?: string;
+}
+
 export const SettingsTab = () => {
   const [settings, setSettings] = useState<SystemSettings>({
     site_name: "Sofitel Frankfurt Opera",
@@ -32,38 +44,37 @@ export const SettingsTab = () => {
     const fetchSettings = async () => {
       setIsLoading(true);
       try {
-        // Check if the settings table exists
-        const { data: tableExists } = await supabase
+        const { data, error } = await supabase
           .from('system_settings')
           .select('*')
-          .limit(1)
+          .eq('id', 'default')
           .maybeSingle();
-
-        // If table exists and has data, load it
-        if (tableExists) {
-          const { data, error } = await supabase
-            .from('system_settings')
-            .select('*')
-            .eq('id', 'default')
-            .single();
             
-          if (error) throw error;
-          
-          if (data) {
-            setSettings({
-              site_name: data.site_name || settings.site_name,
-              contact_email: data.contact_email || settings.contact_email,
-              export_format: data.export_format || settings.export_format,
-              include_personal_data: data.include_personal_data || settings.include_personal_data,
-              notification_enabled: data.notification_enabled || settings.notification_enabled
+        if (error) {
+          console.error("Error fetching settings:", error);
+          // Only show error if it's not a "no rows" error 
+          // (which is expected the first time)
+          if (error.code !== 'PGRST116') {
+            toast({
+              title: "Error",
+              description: "Failed to load settings. Using defaults.",
+              variant: "destructive"
             });
           }
-        } else {
-          // If settings table doesn't exist or is empty, create it
-          console.log("Settings table doesn't exist or is empty. Using defaults.");
+          return;
+        }
+          
+        if (data) {
+          setSettings({
+            site_name: data.site_name,
+            contact_email: data.contact_email,
+            export_format: data.export_format as "csv" | "excel" | "json",
+            include_personal_data: Boolean(data.include_personal_data),
+            notification_enabled: Boolean(data.notification_enabled)
+          });
         }
       } catch (error) {
-        console.error("Error fetching settings:", error);
+        console.error("Error in fetchSettings:", error);
         toast({
           title: "Error",
           description: "Failed to load settings. Using defaults.",
@@ -80,36 +91,28 @@ export const SettingsTab = () => {
   const saveSettings = async () => {
     setIsSaving(true);
     try {
-      // Try to create the settings record or update it if it exists
+      const settingsData: SystemSettingsRow = {
+        id: 'default',
+        site_name: settings.site_name,
+        contact_email: settings.contact_email,
+        export_format: settings.export_format,
+        include_personal_data: settings.include_personal_data,
+        notification_enabled: settings.notification_enabled,
+        updated_at: new Date().toISOString()
+      };
+
       const { error } = await supabase
         .from('system_settings')
-        .upsert({
-          id: 'default',
-          site_name: settings.site_name,
-          contact_email: settings.contact_email,
-          export_format: settings.export_format,
-          include_personal_data: settings.include_personal_data,
-          notification_enabled: settings.notification_enabled,
-          updated_at: new Date().toISOString()
-        }, { onConflict: 'id' });
+        .upsert(settingsData, { onConflict: 'id' });
       
       if (error) {
-        if (error.code === '42P01') {
-          // Table doesn't exist yet, log this for now
-          console.log("Settings table doesn't exist. This would need to be created with SQL.");
-          toast({
-            title: "Settings Saved",
-            description: "Settings saved locally. Note: Database table not configured yet.",
-          });
-        } else {
-          throw error;
-        }
-      } else {
-        toast({
-          title: "Settings Saved",
-          description: "Your system settings have been updated successfully.",
-        });
+        throw error;
       }
+
+      toast({
+        title: "Settings Saved",
+        description: "Your system settings have been updated successfully.",
+      });
     } catch (error) {
       console.error("Error saving settings:", error);
       toast({
