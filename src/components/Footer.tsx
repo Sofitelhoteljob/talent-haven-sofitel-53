@@ -69,9 +69,14 @@ export const Footer = () => {
             <h3 className="font-playfair text-lg font-semibold mb-6">Company</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/accor-group" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://group.accor.com/en" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Accor Group
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/management" className="text-muted-foreground hover:text-primary transition-colors">
