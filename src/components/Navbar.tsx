@@ -28,9 +28,14 @@ export const Navbar = () => {
             <Link to="/development-program" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               Development Program
             </Link>
-            <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
+            <a 
+              href="https://sofitel.accor.com/en/discover-sofitel.html" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-foreground hover:text-secondary transition-colors"
+            >
               About Us
-            </Link>
+            </a>
             <Link to="#" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               Contact
             </Link>
@@ -76,13 +81,15 @@ export const Navbar = () => {
               >
                 Development Program
               </Link>
-              <Link 
-                to="#" 
+              <a 
+                href="https://sofitel.accor.com/en/discover-sofitel.html"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About Us
-              </Link>
+              </a>
               <Link 
                 to="#" 
                 className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
