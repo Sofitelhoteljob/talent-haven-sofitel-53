@@ -1,16 +1,18 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Department, EmploymentType, Job, Location } from "@/types/job";
 import { JobCard } from "@/components/JobCard";
 import { JobFilters } from "@/components/JobFilters";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { getJobs, seedInitialJobs, trackJobView } from "@/services/jobService";
+import { Skeleton } from "@/components/ui/skeleton";
 
-// Sample job data
-const JOBS: Job[] = [
+// Sample job data for initial seeding if needed
+const SAMPLE_JOBS: Omit<Job, 'id' | 'is_active'>[] = [
   // Food & Beverage Jobs
   {
-    id: "1",
     title: "Food & Beverage Supervisor",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -26,7 +28,6 @@ const JOBS: Job[] = [
     postedDate: "2024-03-15"
   },
   {
-    id: "2",
     title: "Stagiaire Restauration (Intern)",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -42,7 +43,6 @@ const JOBS: Job[] = [
     postedDate: "2024-03-15"
   },
   {
-    id: "3",
     title: "Conference & Events Operations Manager",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -59,7 +59,6 @@ const JOBS: Job[] = [
   },
   // Culinary Jobs
   {
-    id: "4",
     title: "Chef de Partie - Rooftop",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -75,7 +74,6 @@ const JOBS: Job[] = [
     postedDate: "2024-03-14"
   },
   {
-    id: "5",
     title: "Premier Chef de Partie Pâtisserie",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -91,7 +89,6 @@ const JOBS: Job[] = [
     postedDate: "2024-03-13"
   },
   {
-    id: "6",
     title: "Chef Exécutif H/F",
     department: "Food & Beverage",
     location: "Frankfurt Main",
@@ -115,15 +112,44 @@ export const JobListingsSection = () => {
   const [location, setLocation] = useState<Location | 'All'>('All');
   const [employmentType, setEmploymentType] = useState<EmploymentType | 'All'>('All');
   const [showAll, setShowAll] = useState(false);
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const handleApply = (jobId: string) => {
+  useEffect(() => {
+    const loadJobs = async () => {
+      try {
+        // First attempt to seed the database with initial data if empty
+        await seedInitialJobs(SAMPLE_JOBS);
+        
+        // Then fetch all jobs
+        const fetchedJobs = await getJobs();
+        setJobs(fetchedJobs);
+      } catch (error) {
+        console.error("Error loading jobs:", error);
+        toast({
+          title: "Error",
+          description: "Failed to load job listings. Please try again later.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadJobs();
+  }, [toast]);
+
+  const handleApply = async (jobId: string) => {
+    // Track job application view for analytics
+    await trackJobView(jobId);
+    
     toast({
       title: "Application Started",
       description: "Thank you for your interest. The application form will open shortly.",
     });
   };
 
-  const filteredJobs = JOBS.filter(job => {
+  const filteredJobs = jobs.filter(job => {
     const matchesSearch = job.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          job.description.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDepartment = department === 'All' || job.department === department;
@@ -157,17 +183,48 @@ export const JobListingsSection = () => {
           onEmploymentTypeChange={setEmploymentType}
         />
 
-        <div className="mt-8 grid gap-6">
-          {displayedJobs.length > 0 ? (
-            displayedJobs.map((job) => (
-              <JobCard key={job.id} job={job} onApply={handleApply} />
-            ))
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground">No positions found matching your criteria.</p>
-            </div>
-          )}
-        </div>
+        {isLoading ? (
+          <div className="mt-8 grid gap-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="rounded-lg border p-6 shadow-sm">
+                <div className="flex justify-between items-start">
+                  <div className="space-y-3">
+                    <Skeleton className="h-6 w-64" />
+                    <div className="flex space-x-2">
+                      <Skeleton className="h-5 w-24" />
+                      <Skeleton className="h-5 w-20" />
+                      <Skeleton className="h-5 w-32" />
+                    </div>
+                  </div>
+                  <div>
+                    <Skeleton className="h-5 w-24" />
+                    <Skeleton className="h-4 w-16 mt-1" />
+                  </div>
+                </div>
+                <div className="mt-4 space-y-3">
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-3/4" />
+                </div>
+                <div className="mt-4">
+                  <Skeleton className="h-10 w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-8 grid gap-6">
+            {displayedJobs.length > 0 ? (
+              displayedJobs.map((job) => (
+                <JobCard key={job.id} job={job} onApply={handleApply} />
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground">No positions found matching your criteria.</p>
+              </div>
+            )}
+          </div>
+        )}
 
         {filteredJobs.length > 3 && (
           <div className="mt-8 text-center">

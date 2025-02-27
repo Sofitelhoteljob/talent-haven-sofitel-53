@@ -9,7 +9,116 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      analytics: {
+        Row: {
+          created_at: string | null
+          event_data: Json
+          event_type: string
+          id: string
+        }
+        Insert: {
+          created_at?: string | null
+          event_data: Json
+          event_type: string
+          id?: string
+        }
+        Update: {
+          created_at?: string | null
+          event_data?: Json
+          event_type?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      job_applications: {
+        Row: {
+          cover_letter: string
+          created_at: string | null
+          email: string
+          full_name: string
+          id: string
+          job_id: string | null
+          phone: string
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          cover_letter: string
+          created_at?: string | null
+          email: string
+          full_name: string
+          id?: string
+          job_id?: string | null
+          phone: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          cover_letter?: string
+          created_at?: string | null
+          email?: string
+          full_name?: string
+          id?: string
+          job_id?: string | null
+          phone?: string
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_job_id_fkey"
+            columns: ["job_id"]
+            isOneToOne: false
+            referencedRelation: "jobs"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      jobs: {
+        Row: {
+          created_at: string | null
+          department: string
+          description: string
+          employment_type: string
+          id: string
+          is_active: boolean | null
+          location: string
+          posted_date: string | null
+          requirements: string[]
+          salary_range: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          department: string
+          description: string
+          employment_type: string
+          id?: string
+          is_active?: boolean | null
+          location: string
+          posted_date?: string | null
+          requirements: string[]
+          salary_range: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          department?: string
+          description?: string
+          employment_type?: string
+          id?: string
+          is_active?: boolean | null
+          location?: string
+          posted_date?: string | null
+          requirements?: string[]
+          salary_range?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

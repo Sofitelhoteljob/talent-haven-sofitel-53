@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Job } from "@/types/job";
+import { Job, JobApplication } from "@/types/job";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
+import { submitJobApplication } from "@/services/jobService";
+import { Loader2 } from "lucide-react";
 
 interface JobApplicationFormProps {
   job: Job;
@@ -21,6 +23,7 @@ interface JobApplicationFormProps {
 
 export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormProps) => {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -28,20 +31,54 @@ export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormP
     coverLetter: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the application data to your backend
-    toast({
-      title: "Application Submitted",
-      description: "Thank you for your application. We will contact you soon.",
-    });
-    onClose();
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      coverLetter: "",
-    });
+    setIsSubmitting(true);
+    
+    try {
+      // Create application object
+      const application: JobApplication = {
+        job_id: job.id,
+        full_name: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        cover_letter: formData.coverLetter,
+      };
+      
+      // Submit to Supabase
+      const result = await submitJobApplication(application);
+      
+      if (result.success) {
+        toast({
+          title: "Application Submitted",
+          description: "Thank you for your application. We will contact you soon.",
+        });
+        
+        // Reset form and close dialog
+        onClose();
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          coverLetter: "",
+        });
+      } else {
+        toast({
+          title: "Submission Failed",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      toast({
+        title: "Submission Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -73,6 +110,7 @@ export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormP
               onChange={handleChange}
               placeholder="Enter your full name"
               required
+              disabled={isSubmitting}
             />
           </div>
           <div className="space-y-2">
@@ -87,6 +125,7 @@ export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormP
               onChange={handleChange}
               placeholder="Enter your email"
               required
+              disabled={isSubmitting}
             />
           </div>
           <div className="space-y-2">
@@ -101,6 +140,7 @@ export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormP
               onChange={handleChange}
               placeholder="Enter your phone number"
               required
+              disabled={isSubmitting}
             />
           </div>
           <div className="space-y-2">
@@ -115,14 +155,26 @@ export const JobApplicationForm = ({ job, isOpen, onClose }: JobApplicationFormP
               placeholder="Tell us why you'd be great for this role"
               className="min-h-[150px]"
               required
+              disabled={isSubmitting}
             />
           </div>
           <div className="flex gap-3 justify-end">
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={onClose} disabled={isSubmitting}>
               Cancel
             </Button>
-            <Button type="submit" className="bg-secondary hover:bg-secondary/90">
-              Submit Application
+            <Button 
+              type="submit" 
+              className="bg-secondary hover:bg-secondary/90"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                "Submit Application"
+              )}
             </Button>
           </div>
         </form>
