@@ -106,9 +106,14 @@ export const Footer = () => {
             <h3 className="font-playfair text-lg font-semibold mb-6">Mobile APP</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/ios-app" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://apps.apple.com/fr/app/accorhotels-reservation-dhotels/id489472613?mat_click_id=e049ba62d2de4110bf75f6dc18cf287e-20220412-14012&referrer=mat_click_id%3De049ba62d2de4110bf75f6dc18cf287e-20220412-14012%26link_click_id%3D1042332667187820012" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   iOS app
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/android-app" className="text-muted-foreground hover:text-primary transition-colors">
