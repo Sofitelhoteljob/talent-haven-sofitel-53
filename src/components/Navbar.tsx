@@ -12,10 +12,6 @@ export const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleApplyNow = () => {
-    window.location.href = 'https://careers.accor.com/global/en/sofitel-jobs';
-  };
-
   return (
     <header className="fixed top-0 left-0 w-full bg-white bg-opacity-95 shadow-sm z-50">
       <div className="container mx-auto px-6">
@@ -57,16 +53,6 @@ export const Navbar = () => {
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
-
-          {/* Apply Button */}
-          <div className="hidden md:block">
-            <Button 
-              className="bg-secondary hover:bg-secondary/90 text-white"
-              onClick={handleApplyNow}
-            >
-              Apply Now
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -105,15 +91,6 @@ export const Navbar = () => {
               >
                 Contact
               </Link>
-              <Button 
-                className="bg-secondary hover:bg-secondary/90 text-white w-full mt-2"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  handleApplyNow();
-                }}
-              >
-                Apply Now
-              </Button>
             </nav>
           </div>
         </div>
