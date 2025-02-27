@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -43,9 +42,14 @@ export const Footer = () => {
             <h3 className="font-playfair text-lg font-semibold mb-6">Navigation</h3>
             <ul className="space-y-4">
               <li>
-                <Link to="/web-accessibility" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://all.accor.com/web-accessibility/index.en.shtml" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Web accessibility
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
