@@ -2,6 +2,13 @@
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Briefcase, Heart, Award, Building } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const benefits = [
   {
@@ -26,6 +33,45 @@ const benefits = [
   }
 ];
 
+const carouselImages = [
+  {
+    src: "/lovable-uploads/cb34e963-852e-4568-a5b6-cba5db17673d.png",
+    alt: "Luxury lounge area with yellow chairs"
+  },
+  {
+    src: "/lovable-uploads/79292aec-c144-4e09-b99f-d3320cab2a1f.png",
+    alt: "Elegant hotel bedroom"
+  },
+  {
+    src: "/lovable-uploads/0b612257-0fb7-479f-b14a-ff318247b8e9.png",
+    alt: "Modern hotel room interior"
+  },
+  {
+    src: "/lovable-uploads/bca6acf8-6961-445e-beac-6f6ada16843a.png",
+    alt: "Spa massage treatment"
+  },
+  {
+    src: "/lovable-uploads/05044d72-53e2-4e97-8f88-4ee78c95496d.png",
+    alt: "Facial treatment at spa"
+  },
+  {
+    src: "/lovable-uploads/b64348a5-7bcb-46f4-a1e3-ccf29ebafd69.png",
+    alt: "Couple in bathrobes enjoying view"
+  },
+  {
+    src: "/lovable-uploads/76404b92-ed4b-4b2e-8f74-132d4648d5fb.png",
+    alt: "Couple dancing in hotel room"
+  },
+  {
+    src: "/lovable-uploads/93088b86-2ffd-4b71-8238-907a99489b17.png",
+    alt: "Historic Frankfurt Opera House with bicycles"
+  },
+  {
+    src: "/lovable-uploads/84329b53-2b02-474b-84a3-648b8f92958a.png",
+    alt: "Couple dining at luxury restaurant"
+  }
+];
+
 export const BenefitsSection = () => {
   return (
     <section className="py-20 bg-white">
@@ -38,7 +84,7 @@ export const BenefitsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 mb-16">
           {benefits.map((benefit, index) => (
             <Card 
               key={index} 
@@ -51,6 +97,32 @@ export const BenefitsSection = () => {
               <p className="text-muted-foreground leading-relaxed">{benefit.description}</p>
             </Card>
           ))}
+        </div>
+
+        <div className="mt-16 relative">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {carouselImages.map((image, index) => (
+                <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-4 bg-white/80 hover:bg-white" />
+            <CarouselNext className="hidden md:flex -right-4 bg-white/80 hover:bg-white" />
+          </Carousel>
         </div>
       </div>
     </section>
