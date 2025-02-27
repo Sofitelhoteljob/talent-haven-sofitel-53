@@ -21,9 +21,14 @@ export const Footer = () => {
                 </a>
               </li>
               <li>
-                <Link to="/meetings-events" className="text-muted-foreground hover:text-primary transition-colors">
+                <a 
+                  href="https://meetings.accor.com/portal/index.en.shtml" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
                   Meetings & Events
-                </Link>
+                </a>
               </li>
               <li>
                 <Link to="/travel-professionals" className="text-muted-foreground hover:text-primary transition-colors">
