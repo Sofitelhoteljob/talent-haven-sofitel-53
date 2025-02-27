@@ -1,6 +1,12 @@
 
 import { supabase } from "@/integrations/supabase/client";
-import { Job, JobApplication } from "@/types/job";
+import { 
+  Job, 
+  JobApplication, 
+  ensureDepartment, 
+  ensureLocation, 
+  ensureEmploymentType 
+} from "@/types/job";
 
 // Job Listings
 export const getJobs = async (): Promise<Job[]> => {
@@ -12,13 +18,13 @@ export const getJobs = async (): Promise<Job[]> => {
     
     if (error) throw error;
     
-    // Format the data to match our Job interface
+    // Format the data to match our Job interface with proper type checking
     return data.map((job) => ({
       id: job.id,
       title: job.title,
-      department: job.department,
-      location: job.location,
-      employmentType: job.employment_type,
+      department: ensureDepartment(job.department),
+      location: ensureLocation(job.location),
+      employmentType: ensureEmploymentType(job.employment_type),
       salaryRange: job.salary_range,
       requirements: job.requirements,
       description: job.description,
@@ -44,9 +50,9 @@ export const getJobById = async (id: string): Promise<Job | null> => {
     return {
       id: data.id,
       title: data.title,
-      department: data.department,
-      location: data.location,
-      employmentType: data.employment_type,
+      department: ensureDepartment(data.department),
+      location: ensureLocation(data.location),
+      employmentType: ensureEmploymentType(data.employment_type),
       salaryRange: data.salary_range,
       requirements: data.requirements,
       description: data.description,
@@ -134,6 +140,7 @@ export const seedInitialJobs = async (jobs: Omit<Job, 'id' | 'is_active'>[]): Pr
     
     // Only seed if no jobs exist
     if (count === 0) {
+      // Convert the typed job data to the database schema
       const jobsToInsert = jobs.map(job => ({
         title: job.title,
         department: job.department,
@@ -142,7 +149,7 @@ export const seedInitialJobs = async (jobs: Omit<Job, 'id' | 'is_active'>[]): Pr
         salary_range: job.salaryRange,
         requirements: job.requirements,
         description: job.description,
-        posted_date: new Date(job.postedDate),
+        posted_date: job.postedDate,
         is_active: true
       }));
       

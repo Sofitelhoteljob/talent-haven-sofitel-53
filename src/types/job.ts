@@ -27,3 +27,28 @@ export interface JobApplication {
   status?: ApplicationStatus;
   created_at?: string;
 }
+
+// Database-to-frontend type conversion helpers
+export function isValidDepartment(value: string): value is Department {
+  return ['Food & Beverage', 'Housekeeping', 'Front Office', 'Sales & Marketing', 'Administration'].includes(value);
+}
+
+export function isValidLocation(value: string): value is Location {
+  return ['Frankfurt Main', 'Remote', 'Hybrid'].includes(value);
+}
+
+export function isValidEmploymentType(value: string): value is EmploymentType {
+  return ['Full-time', 'Part-time', 'Temporary', 'Internship'].includes(value);
+}
+
+export function ensureDepartment(value: string): Department {
+  return isValidDepartment(value) ? value : 'Administration';
+}
+
+export function ensureLocation(value: string): Location {
+  return isValidLocation(value) ? value : 'Frankfurt Main';
+}
+
+export function ensureEmploymentType(value: string): EmploymentType {
+  return isValidEmploymentType(value) ? value : 'Full-time';
+}
