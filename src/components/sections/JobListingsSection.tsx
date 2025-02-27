@@ -8,52 +8,102 @@ import { useToast } from "@/components/ui/use-toast";
 
 // Sample job data
 const JOBS: Job[] = [
+  // Food & Beverage Jobs
   {
     id: "1",
-    title: "Executive Chef",
+    title: "Food & Beverage Supervisor",
     department: "Food & Beverage",
     location: "Frankfurt Main",
     employmentType: "Full-time",
-    salaryRange: "€60,000 - €80,000",
+    salaryRange: "Competitive",
     requirements: [
-      "Minimum 5 years experience in luxury hospitality",
-      "Culinary degree required",
-      "Strong leadership skills",
-      "Fluent in English and German"
+      "Previous supervisory experience in luxury hospitality",
+      "Excellent communication and leadership skills",
+      "Fluent in English and German",
+      "Strong organizational abilities"
     ],
-    description: "Lead our culinary team in creating exceptional dining experiences for our guests.",
+    description: "Lead and supervise food & beverage operations at Sofitel Frankfurt Opera.",
     postedDate: "2024-03-15"
   },
   {
     id: "2",
-    title: "Front Office Manager",
-    department: "Front Office",
+    title: "Stagiaire Restauration (Intern)",
+    department: "Food & Beverage",
     location: "Frankfurt Main",
-    employmentType: "Full-time",
-    salaryRange: "€45,000 - €55,000",
+    employmentType: "Internship",
+    salaryRange: "Competitive",
     requirements: [
-      "3+ years front office experience",
-      "Excellent communication skills",
-      "Experience with Opera PMS",
-      "Fluent in English and German"
+      "Currently enrolled in hospitality management program",
+      "Basic knowledge of F&B operations",
+      "Good communication skills",
+      "English and German language skills"
     ],
-    description: "Manage our front office operations and ensure exceptional guest experiences.",
-    postedDate: "2024-03-14"
+    description: "Join our F&B team as an intern and gain hands-on experience in luxury hospitality.",
+    postedDate: "2024-03-15"
   },
   {
     id: "3",
-    title: "Digital Marketing Specialist",
-    department: "Sales & Marketing",
-    location: "Hybrid",
+    title: "Conference & Events Operations Manager",
+    department: "Food & Beverage",
+    location: "Frankfurt Main",
     employmentType: "Full-time",
-    salaryRange: "€40,000 - €50,000",
+    salaryRange: "Competitive",
     requirements: [
-      "2+ years digital marketing experience",
-      "Experience with social media management",
-      "Strong analytical skills",
-      "Knowledge of SEO and SEM"
+      "5+ years experience in events management",
+      "Strong organizational and leadership skills",
+      "Experience in luxury hospitality",
+      "Fluent in English and German"
     ],
-    description: "Drive our digital marketing initiatives and enhance our online presence.",
+    description: "Manage and oversee all aspects of conference and events operations.",
+    postedDate: "2024-03-14"
+  },
+  // Culinary Jobs
+  {
+    id: "4",
+    title: "Chef de Partie - Rooftop",
+    department: "Food & Beverage",
+    location: "Frankfurt Main",
+    employmentType: "Full-time",
+    salaryRange: "Competitive",
+    requirements: [
+      "3+ years experience as Chef de Partie",
+      "Experience in fine dining restaurants",
+      "Strong culinary skills",
+      "Team management experience"
+    ],
+    description: "Join our culinary team as Chef de Partie for our exclusive rooftop restaurant.",
+    postedDate: "2024-03-14"
+  },
+  {
+    id: "5",
+    title: "Premier Chef de Partie Pâtisserie",
+    department: "Food & Beverage",
+    location: "Frankfurt Main",
+    employmentType: "Full-time",
+    salaryRange: "Competitive",
+    requirements: [
+      "5+ years experience in pastry",
+      "Experience in luxury hotels or fine dining",
+      "Creative mindset",
+      "Leadership skills"
+    ],
+    description: "Lead our pastry team in creating exceptional desserts and pastries.",
+    postedDate: "2024-03-13"
+  },
+  {
+    id: "6",
+    title: "Chef Exécutif H/F",
+    department: "Food & Beverage",
+    location: "Frankfurt Main",
+    employmentType: "Full-time",
+    salaryRange: "Competitive",
+    requirements: [
+      "10+ years culinary experience",
+      "Previous experience as Executive Chef",
+      "Strong leadership and management skills",
+      "Fluent in English, German knowledge preferred"
+    ],
+    description: "Lead our entire culinary operation and maintain the highest standards of gastronomy.",
     postedDate: "2024-03-13"
   }
 ];
