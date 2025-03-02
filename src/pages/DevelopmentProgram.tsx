@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
@@ -65,11 +64,13 @@ const DevelopmentProgram = () => {
 
   const handleSubmitApplication = (e: React.FormEvent) => {
     e.preventDefault();
+    const whatsappLink = "https://wa.me/491234567890?text=I'm%20interested%20in%20the%20Global%20Talent%20Program";
+    window.open(whatsappLink, "_blank");
+    
     toast({
-      title: "Application Received",
-      description: "Thank you for your interest in our Development Program. We will contact you shortly.",
+      title: "Redirecting to WhatsApp",
+      description: "You'll be connected with our recruitment team via WhatsApp.",
     });
-    setFormStep(1);
   };
 
   return (
