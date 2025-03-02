@@ -1,6 +1,8 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu, Download, Upload } from "lucide-react";
+import { Menu, Download, Upload, LogOut, Settings } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useEffect, useState } from "react";
 
 interface DashboardHeaderProps {
   onMenuToggle: () => void;
@@ -15,6 +17,19 @@ export const DashboardHeader = ({
   onImport,
   onLogout,
 }: DashboardHeaderProps) => {
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const { data } = await supabase.auth.getUser();
+      if (data?.user) {
+        setUserEmail(data.user.email);
+      }
+    };
+
+    getUserInfo();
+  }, []);
+
   return (
     <div className="flex items-center justify-between mb-8">
       <div className="flex items-center">
@@ -26,7 +41,12 @@ export const DashboardHeader = ({
         >
           <Menu size={24} />
         </Button>
-        <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+        <div>
+          <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+          {userEmail && (
+            <p className="text-sm text-muted-foreground">Logged in as: {userEmail}</p>
+          )}
+        </div>
       </div>
       
       <div className="hidden md:flex items-center space-x-4">
@@ -65,8 +85,10 @@ export const DashboardHeader = ({
         <Button 
           variant="outline" 
           onClick={onLogout}
+          className="flex items-center gap-1"
         >
-          Logout
+          <LogOut size={16} />
+          <span>Logout</span>
         </Button>
       </div>
       
@@ -76,7 +98,7 @@ export const DashboardHeader = ({
         size="sm"
         onClick={onLogout}
       >
-        Logout
+        <LogOut size={16} />
       </Button>
     </div>
   );

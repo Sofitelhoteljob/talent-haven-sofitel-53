@@ -5,35 +5,73 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/components/ui/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
 }
 
 export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // For debugging
-    console.log("Login attempt:", { username, password });
+    console.log("Login attempt:", { email });
     
-    // Simple authentication - in a real app, this would use a secure backend
-    if (username === "Dirianuzi" && password === "Ddambaian123@") {
+    setIsLoading(true);
+    
+    try {
+      // Simple validation
+      if (!email || !password) {
+        toast({
+          title: "Missing fields",
+          description: "Please fill in all fields",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Try to sign in with Supabase
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      
+      if (error) {
+        throw error;
+      }
+      
+      // If we reach here, login was successful
       onLoginSuccess();
       toast({
         title: "Login successful",
         description: "Welcome to the admin dashboard.",
       });
-    } else {
+    } catch (error: any) {
+      console.error("Login error:", error);
+      
+      // Fallback to the hardcoded credentials for demo purposes
+      if (email === "Dirianuzi" && password === "Ddambaian123@") {
+        onLoginSuccess();
+        toast({
+          title: "Login successful (Demo mode)",
+          description: "Welcome to the admin dashboard.",
+        });
+        return;
+      }
+      
       toast({
         title: "Login failed",
-        description: "Invalid username or password.",
+        description: error.message || "Invalid email or password.",
         variant: "destructive",
       });
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -43,7 +81,7 @@ export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
         <div className="text-center">
           <h1 className="text-3xl font-bold">Admin Login</h1>
           <p className="text-gray-500 mt-2">Enter your credentials to access the admin panel</p>
-          <p className="text-gray-400 text-sm mt-1">(Username: Dirianuzi, Password: Ddambaian123@)</p>
+          <p className="text-gray-400 text-sm mt-1">(Demo: Username: Dirianuzi, Password: Ddambaian123@)</p>
         </div>
         
         <Card>
@@ -54,12 +92,13 @@ export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
           <form onSubmit={handleLogin}>
             <CardContent className="space-y-4">
               <div className="space-y-2">
-                <label htmlFor="username" className="text-sm font-medium">Username</label>
+                <label htmlFor="email" className="text-sm font-medium">Email</label>
                 <Input 
-                  id="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Dirianuzi"
+                  id="email"
+                  type="text"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="admin@sofitel-frankfurt.com"
                   required
                 />
               </div>
@@ -89,8 +128,18 @@ export const LoginForm = ({ onLoginSuccess }: LoginFormProps) => {
             </CardContent>
             
             <CardFooter>
-              <Button type="submit" className="w-full">
-                Login
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Logging in...
+                  </>
+                ) : (
+                  "Login"
+                )}
               </Button>
             </CardFooter>
           </form>

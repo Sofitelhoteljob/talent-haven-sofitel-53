@@ -28,6 +28,12 @@ export interface JobApplication {
   created_at?: string;
 }
 
+export interface AdminUser {
+  username: string;
+  role: 'admin' | 'editor' | 'viewer';
+  lastLogin?: string;
+}
+
 // Database-to-frontend type conversion helpers
 export function isValidDepartment(value: string): value is Department {
   return ['Food & Beverage', 'Housekeeping', 'Front Office', 'Sales & Marketing', 'Administration'].includes(value);
