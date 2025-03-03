@@ -64,7 +64,7 @@ const DevelopmentProgram = () => {
 
   const handleSubmitApplication = (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappLink = "https://wa.me/491234567890?text=I'm%20interested%20in%20the%20Global%20Talent%20Program";
+    const whatsappLink = "https://wa.me/+4915210755401?text=I'm%20interested%20in%20the%20Global%20Talent%20Program";
     window.open(whatsappLink, "_blank");
     
     toast({
