@@ -1,6 +1,7 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export const QuickApplySection = () => {
   return (
@@ -11,12 +12,14 @@ export const QuickApplySection = () => {
         <p className="text-muted-foreground max-w-2xl mx-auto mb-8">
           Discover opportunities to work, learn, and grow with Sofitel Frankfurt Opera.
         </p>
-        <Button 
-          size="lg" 
-          className="bg-primary hover:bg-primary/90 text-white"
-        >
-          Apply Now
-        </Button>
+        <Link to="/development-program">
+          <Button 
+            size="lg" 
+            className="bg-primary hover:bg-primary/90 text-white"
+          >
+            Apply Now
+          </Button>
+        </Link>
       </div>
     </section>
   );

@@ -8,6 +8,13 @@ export const HeroSection = () => {
     console.log("Loading image from:", "/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png");
   }, []);
 
+  const scrollToJobListings = () => {
+    const jobListingsSection = document.querySelector('section:has(h2:contains("Join Our Team"))');
+    if (jobListingsSection) {
+      jobListingsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       <div 
@@ -30,6 +37,7 @@ export const HeroSection = () => {
         <Button 
           size="lg" 
           className="bg-secondary hover:bg-secondary/90 text-white animate-fade-in"
+          onClick={scrollToJobListings}
         >
           View Open Positions
         </Button>

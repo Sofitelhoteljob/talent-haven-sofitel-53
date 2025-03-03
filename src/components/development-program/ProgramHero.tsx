@@ -21,6 +21,7 @@ export const ProgramHero = () => {
           backgroundPosition: "center",
           backgroundSize: "cover"
         }}
+        aria-label="Background image of Sofitel Frankfurt Opera"
       />
       <div className="relative container mx-auto px-6 text-center text-white z-10">
         <Badge className="bg-secondary text-white mb-6 animate-fade-in">Global Talent Initiative</Badge>
@@ -34,6 +35,7 @@ export const ProgramHero = () => {
           size="lg" 
           className="bg-secondary hover:bg-secondary/90 text-white animate-fade-in"
           onClick={scrollToApply}
+          aria-label="Scroll to application form"
         >
           Apply Now <ArrowRight className="ml-2 h-4 w-4" />
         </Button>

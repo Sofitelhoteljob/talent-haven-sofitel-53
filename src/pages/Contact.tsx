@@ -3,10 +3,23 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { MapPin, Mail, Phone } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Contact Us | Sofitel Frankfurt Opera Careers</title>
+        <meta name="description" content="Get in touch with our recruitment team at Sofitel Frankfurt Opera. Find contact details for career inquiries and job opportunities." />
+        <meta name="keywords" content="contact Sofitel Frankfurt, luxury hotel recruitment, hospitality career contact, hotel job inquiries" />
+        <meta property="og:title" content="Contact Us | Sofitel Frankfurt Opera Careers" />
+        <meta property="og:description" content="Get in touch with our recruitment team at Sofitel Frankfurt Opera." />
+        <meta property="og:image" content="/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png" />
+        <meta property="og:url" content="https://sofitel-frankfurt-careers.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="canonical" href="https://sofitel-frankfurt-careers.com/contact" />
+      </Helmet>
       <Navbar />
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
