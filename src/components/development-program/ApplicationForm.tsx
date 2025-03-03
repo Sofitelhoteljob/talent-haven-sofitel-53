@@ -18,9 +18,14 @@ interface FormData {
   motivation: string;
 }
 
+interface FormErrors {
+  [key: string]: string;
+}
+
 export const ApplicationForm = () => {
   const [formStep, setFormStep] = useState(1);
   const { toast } = useToast();
+  const [errors, setErrors] = useState<FormErrors>({});
   
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -32,8 +37,59 @@ export const ApplicationForm = () => {
     motivation: ""
   });
 
+  const validateStep = (step: number): boolean => {
+    const newErrors: FormErrors = {};
+    let isValid = true;
+
+    if (step === 1) {
+      if (!formData.fullName.trim()) {
+        newErrors.fullName = "Full name is required";
+        isValid = false;
+      }
+      if (!formData.email.trim()) {
+        newErrors.email = "Email is required";
+        isValid = false;
+      } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+        newErrors.email = "Invalid email format";
+        isValid = false;
+      }
+      if (!formData.phone.trim()) {
+        newErrors.phone = "Phone number is required";
+        isValid = false;
+      }
+      if (!formData.country) {
+        newErrors.country = "Country is required";
+        isValid = false;
+      }
+    } else if (step === 2) {
+      if (!formData.program) {
+        newErrors.program = "Program selection is required";
+        isValid = false;
+      }
+      if (!formData.experience) {
+        newErrors.experience = "Experience level is required";
+        isValid = false;
+      }
+      if (!formData.motivation.trim()) {
+        newErrors.motivation = "Motivation letter is required";
+        isValid = false;
+      }
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleNextStep = () => {
-    setFormStep(prev => prev + 1);
+    if (validateStep(formStep)) {
+      setFormStep(prev => prev + 1);
+    } else {
+      toast({
+        title: "Please complete all fields",
+        description: "All questions must be answered before proceeding.",
+        variant: "destructive"
+      });
+    }
   };
 
   const handlePrevStep = () => {
@@ -46,6 +102,13 @@ export const ApplicationForm = () => {
       ...prev,
       [id]: value
     }));
+    // Clear error when user starts typing
+    if (errors[id]) {
+      setErrors(prev => ({
+        ...prev,
+        [id]: ""
+      }));
+    }
   };
   
   const handleSelectChange = (name: string, value: string) => {
@@ -53,10 +116,27 @@ export const ApplicationForm = () => {
       ...prev,
       [name]: value
     }));
+    // Clear error when user selects an option
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ""
+      }));
+    }
   };
 
   const handleSubmitApplication = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Validate step 3 (final confirmation)
+    if (!validateStep(2)) {
+      toast({
+        title: "Please complete all fields",
+        description: "All questions must be answered before submitting.",
+        variant: "destructive"
+      });
+      return;
+    }
     
     const message = encodeURIComponent(
       `*New Global Talent Program Application*\n\n` +
@@ -98,7 +178,9 @@ export const ApplicationForm = () => {
                 placeholder="Enter your full name" 
                 value={formData.fullName}
                 onChange={handleInputChange}
+                className={errors.fullName ? "border-destructive" : ""}
               />
+              {errors.fullName && <p className="text-xs text-destructive mt-1">{errors.fullName}</p>}
             </div>
             <div className="space-y-2">
               <label htmlFor="email" className="text-sm font-medium">Email Address</label>
@@ -108,7 +190,9 @@ export const ApplicationForm = () => {
                 placeholder="Enter your email address"
                 value={formData.email}
                 onChange={handleInputChange}
+                className={errors.email ? "border-destructive" : ""}
               />
+              {errors.email && <p className="text-xs text-destructive mt-1">{errors.email}</p>}
             </div>
             <div className="space-y-2">
               <label htmlFor="phone" className="text-sm font-medium">Phone Number</label>
@@ -117,7 +201,9 @@ export const ApplicationForm = () => {
                 placeholder="Enter your phone number"
                 value={formData.phone}
                 onChange={handleInputChange}
+                className={errors.phone ? "border-destructive" : ""}
               />
+              {errors.phone && <p className="text-xs text-destructive mt-1">{errors.phone}</p>}
             </div>
             <div className="space-y-2">
               <label htmlFor="country" className="text-sm font-medium">Country of Residence</label>
@@ -125,7 +211,7 @@ export const ApplicationForm = () => {
                 onValueChange={(value) => handleSelectChange("country", value)}
                 value={formData.country}
               >
-                <SelectTrigger id="country" className="w-full">
+                <SelectTrigger id="country" className={`w-full ${errors.country ? "border-destructive" : ""}`}>
                   <SelectValue placeholder="Select your country" />
                 </SelectTrigger>
                 <SelectContent>
@@ -142,6 +228,7 @@ export const ApplicationForm = () => {
                   <SelectItem value="Other">Other</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.country && <p className="text-xs text-destructive mt-1">{errors.country}</p>}
             </div>
           </div>
         )}
@@ -154,7 +241,7 @@ export const ApplicationForm = () => {
                 onValueChange={(value) => handleSelectChange("program", value)}
                 value={formData.program}
               >
-                <SelectTrigger id="program" className="w-full">
+                <SelectTrigger id="program" className={`w-full ${errors.program ? "border-destructive" : ""}`}>
                   <SelectValue placeholder="Select program" />
                 </SelectTrigger>
                 <SelectContent>
@@ -163,6 +250,7 @@ export const ApplicationForm = () => {
                   <SelectItem value="Asia Development Program">Asia Development Program</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.program && <p className="text-xs text-destructive mt-1">{errors.program}</p>}
             </div>
             <div className="space-y-2">
               <label htmlFor="experience" className="text-sm font-medium">Hospitality Experience</label>
@@ -170,7 +258,7 @@ export const ApplicationForm = () => {
                 onValueChange={(value) => handleSelectChange("experience", value)}
                 value={formData.experience}
               >
-                <SelectTrigger id="experience" className="w-full">
+                <SelectTrigger id="experience" className={`w-full ${errors.experience ? "border-destructive" : ""}`}>
                   <SelectValue placeholder="Select experience level" />
                 </SelectTrigger>
                 <SelectContent>
@@ -180,16 +268,18 @@ export const ApplicationForm = () => {
                   <SelectItem value="5+ years">5+ years</SelectItem>
                 </SelectContent>
               </Select>
+              {errors.experience && <p className="text-xs text-destructive mt-1">{errors.experience}</p>}
             </div>
             <div className="space-y-2">
               <label htmlFor="motivation" className="text-sm font-medium">Motivation Letter</label>
               <Textarea
                 id="motivation"
                 placeholder="Tell us why you want to join the program and what you hope to achieve (max 500 words)"
-                className="min-h-[150px]"
+                className={`min-h-[150px] ${errors.motivation ? "border-destructive" : ""}`}
                 value={formData.motivation}
                 onChange={handleInputChange}
               />
+              {errors.motivation && <p className="text-xs text-destructive mt-1">{errors.motivation}</p>}
             </div>
           </div>
         )}
