@@ -39,7 +39,7 @@ export const HeroSection = () => {
           className="bg-secondary hover:bg-secondary/90 text-white animate-fade-in"
           onClick={scrollToJobListings}
         >
-          View Open Positions
+          Join Development Program
         </Button>
       </div>
     </section>
