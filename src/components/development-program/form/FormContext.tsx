@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -161,7 +160,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
     );
     
     // Updated WhatsApp number here
-    const whatsappLink = `https://wa.me/+491751234567?text=${message}`;
+    const whatsappLink = `https://wa.me/+4915210840824?text=${message}`;
     window.open(whatsappLink, "_blank");
     
     toast({
