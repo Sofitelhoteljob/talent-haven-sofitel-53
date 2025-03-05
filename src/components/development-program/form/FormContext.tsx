@@ -160,7 +160,8 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
       `*Motivation:*\n${formData.motivation}`
     );
     
-    const whatsappLink = `https://wa.me/+4915210755401?text=${message}`;
+    // Updated WhatsApp number here
+    const whatsappLink = `https://wa.me/+491751234567?text=${message}`;
     window.open(whatsappLink, "_blank");
     
     toast({
