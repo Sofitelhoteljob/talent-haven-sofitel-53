@@ -172,16 +172,18 @@ export const JobListingsSection = () => {
           </p>
         </div>
 
-        <JobFilters
-          searchQuery={searchQuery}
-          department={department}
-          location={location}
-          employmentType={employmentType}
-          onSearchChange={setSearchQuery}
-          onDepartmentChange={setDepartment}
-          onLocationChange={setLocation}
-          onEmploymentTypeChange={setEmploymentType}
-        />
+        {jobs.length > 0 && (
+          <JobFilters
+            searchQuery={searchQuery}
+            department={department}
+            location={location}
+            employmentType={employmentType}
+            onSearchChange={setSearchQuery}
+            onDepartmentChange={setDepartment}
+            onLocationChange={setLocation}
+            onEmploymentTypeChange={setEmploymentType}
+          />
+        )}
 
         {isLoading ? (
           <div className="mt-8 grid gap-6">
@@ -214,7 +216,12 @@ export const JobListingsSection = () => {
           </div>
         ) : (
           <div className="mt-8 grid gap-6">
-            {displayedJobs.length > 0 ? (
+            {jobs.length === 0 ? (
+              <div className="text-center py-12 border rounded-lg shadow-sm">
+                <p className="text-muted-foreground text-lg mb-2">No positions are currently available.</p>
+                <p className="text-muted-foreground">Please check back later for new opportunities.</p>
+              </div>
+            ) : displayedJobs.length > 0 ? (
               displayedJobs.map((job) => (
                 <JobCard key={job.id} job={job} onApply={handleApply} />
               ))
