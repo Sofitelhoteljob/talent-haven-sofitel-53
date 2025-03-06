@@ -1,19 +1,13 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 export const HeroSection = () => {
   useEffect(() => {
     console.log("Loading image from:", "/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png");
   }, []);
-
-  const scrollToJobListings = () => {
-    const jobListingsSection = document.querySelector('section:has(h2:contains("Join Our Team"))');
-    if (jobListingsSection) {
-      jobListingsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
@@ -34,13 +28,14 @@ export const HeroSection = () => {
         <p className="font-sans text-lg md:text-xl max-w-2xl mx-auto mb-8 animate-fade-in">
           Be part of the Sofitel Frankfurt Opera team and help us create extraordinary moments for our guests
         </p>
-        <Button 
-          size="lg" 
-          className="bg-secondary hover:bg-secondary/90 text-white animate-fade-in"
-          onClick={scrollToJobListings}
-        >
-          Join Development Program
-        </Button>
+        <Link to="/development-program">
+          <Button 
+            size="lg" 
+            className="bg-secondary hover:bg-secondary/90 text-white animate-fade-in"
+          >
+            Join Development Program
+          </Button>
+        </Link>
       </div>
     </section>
   );
