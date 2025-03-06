@@ -1,3 +1,4 @@
+
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -136,9 +137,6 @@ export const Footer = () => {
               © 2024 Sofitel Frankfurt Opera. All rights reserved.
             </p>
             <div className="flex gap-6">
-              <Link to="/impressum" className="text-sm text-muted-foreground hover:text-primary">
-                Impressum
-              </Link>
               <Link to="/privacy" className="text-sm text-muted-foreground hover:text-primary">
                 Privacy Policy
               </Link>
