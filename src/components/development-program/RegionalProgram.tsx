@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { ImageLoader } from "@/components/ui/image-loader";
 
 interface RegionalProgramProps {
   region: string;
@@ -41,10 +42,13 @@ export const RegionalProgram = ({
     <Card className="overflow-hidden border-secondary/20">
       <div className="grid grid-cols-1 md:grid-cols-3">
         <div className="aspect-square md:aspect-auto">
-          <img 
-            src={imageSrc} 
-            alt={`${title} image`} 
+          <ImageLoader
+            src={imageSrc}
+            alt={`${title} image`}
             className="w-full h-full object-cover"
+            width="400"
+            height="400"
+            containerClassName="w-full h-full"
           />
         </div>
         <div className="col-span-2 p-6 md:p-8">

@@ -9,6 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { useEffect, useState } from "react";
 
 const benefits = [
   {
@@ -73,6 +74,36 @@ const carouselImages = [
 ];
 
 export const BenefitsSection = () => {
+  const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(carouselImages.length).fill(false));
+  
+  // Preload first 3 images, load others when component mounts
+  useEffect(() => {
+    // Set a small delay to not block initial render
+    const timer = setTimeout(() => {
+      setImagesLoaded(prev => {
+        const newState = [...prev];
+        // Mark first 3 as loading immediately
+        newState[0] = true;
+        newState[1] = true;
+        newState[2] = true;
+        return newState;
+      });
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Function to handle image loading by index
+  const handleImageVisible = (index: number) => {
+    if (!imagesLoaded[index]) {
+      setImagesLoaded(prev => {
+        const newState = [...prev];
+        newState[index] = true;
+        return newState;
+      });
+    }
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
@@ -106,16 +137,33 @@ export const BenefitsSection = () => {
               loop: true,
             }}
             className="w-full"
+            onScroll={() => {
+              // Trigger loading of all visible images on scroll
+              carouselImages.forEach((_, index) => handleImageVisible(index));
+            }}
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {carouselImages.map((image, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
-                  <div className="aspect-[4/3] overflow-hidden rounded-lg">
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                  <div 
+                    className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100"
+                    onMouseEnter={() => handleImageVisible(index)}
+                    onIntersectionChange={() => handleImageVisible(index)}
+                  >
+                    {imagesLoaded[index] ? (
+                      <img
+                        src={image.src}
+                        alt={image.alt}
+                        loading={index < 3 ? "eager" : "lazy"}
+                        width="400"
+                        height="300"
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                        <div className="w-8 h-8 border-4 border-secondary/20 border-t-secondary rounded-full animate-spin"></div>
+                      </div>
+                    )}
                   </div>
                 </CarouselItem>
               ))}

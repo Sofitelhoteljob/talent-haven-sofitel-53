@@ -2,13 +2,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 export const HeroSection = () => {
-  useEffect(() => {
-    console.log("Loading image from:", "/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png");
-  }, []);
-
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
       <div 
@@ -19,6 +14,7 @@ export const HeroSection = () => {
           backgroundPosition: "center",
           backgroundSize: "cover"
         }}
+        aria-hidden="true"
       />
       <div className="relative container mx-auto px-6 text-center text-white z-10">
         <Badge className="bg-secondary text-white mb-6 animate-fade-in">We're Hiring</Badge>
