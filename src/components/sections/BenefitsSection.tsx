@@ -1,7 +1,6 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Briefcase, Heart, Award, Building } from "lucide-react";
+import { Briefcase, Heart, Award, Building, Quote } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -74,17 +73,35 @@ const carouselImages = [
   }
 ];
 
+const testimonials = [
+  {
+    quote: "Working at Fairmont Frankfurt has been a transformative experience for my career in hospitality.",
+    name: "Sophia Müller",
+    position: "Front Office Manager",
+    avatar: "/lovable-uploads/05044d72-53e2-4e97-8f88-4ee78c95496d.png"
+  },
+  {
+    quote: "The professional development opportunities here are unmatched in the luxury hotel industry.",
+    name: "Daniel Weber",
+    position: "Executive Chef",
+    avatar: "/lovable-uploads/76404b92-ed4b-4b2e-8f74-132d4648d5fb.png"
+  },
+  {
+    quote: "I've grown both personally and professionally since joining the Fairmont family.",
+    name: "Hannah Becker",
+    position: "Spa Director",
+    avatar: "/lovable-uploads/b64348a5-7bcb-46f4-a1e3-ccf29ebafd69.png"
+  }
+];
+
 export const BenefitsSection = () => {
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(carouselImages.length).fill(false));
   const imageRefs = useRef<(HTMLDivElement | null)[]>(Array(carouselImages.length).fill(null));
   
-  // Preload first 3 images, load others when component mounts
   useEffect(() => {
-    // Set a small delay to not block initial render
     const timer = setTimeout(() => {
       setImagesLoaded(prev => {
         const newState = [...prev];
-        // Mark first 3 as loading immediately
         newState[0] = true;
         newState[1] = true;
         newState[2] = true;
@@ -95,21 +112,18 @@ export const BenefitsSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Setup intersection observer after component mounts
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
     
     imageRefs.current.forEach((ref, index) => {
       if (!ref) return;
       
-      // Skip the first 3 images as they're preloaded
       if (index < 3) return;
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             handleImageVisible(index);
-            // Disconnect once observed
             observer.disconnect();
           }
         });
@@ -119,13 +133,11 @@ export const BenefitsSection = () => {
       observers.push(observer);
     });
     
-    // Cleanup observers on unmount
     return () => {
       observers.forEach(observer => observer.disconnect());
     };
   }, []);
 
-  // Function to handle image loading by index
   const handleImageVisible = useCallback((index: number) => {
     if (!imagesLoaded[index]) {
       setImagesLoaded(prev => {
@@ -161,6 +173,49 @@ export const BenefitsSection = () => {
             </Card>
           ))}
         </div>
+        
+        <div className="mb-16">
+          <h3 className="font-playfair text-2xl font-semibold text-center mb-10">What Our Team Says</h3>
+          <Carousel
+            opts={{
+              align: "center",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                  <Card className="border-secondary/10 h-full flex flex-col">
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="mb-4 text-secondary">
+                        <Quote className="h-8 w-8 opacity-50" />
+                      </div>
+                      <p className="italic text-gray-700 mb-6 flex-grow">"{testimonial.quote}"</p>
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-100">
+                          <ImageLoader
+                            src={testimonial.avatar}
+                            alt={testimonial.name}
+                            width="48"
+                            height="48"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div>
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex -left-4 bg-white/80 hover:bg-white" />
+            <CarouselNext className="hidden md:flex -right-4 bg-white/80 hover:bg-white" />
+          </Carousel>
+        </div>
 
         <div className="mt-16 relative">
           <Carousel
@@ -170,7 +225,6 @@ export const BenefitsSection = () => {
             }}
             className="w-full"
             onScroll={() => {
-              // Trigger loading of all visible images on scroll
               carouselImages.forEach((_, index) => handleImageVisible(index));
             }}
           >
