@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Infinity } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +17,11 @@ export const Navbar = () => {
         <div className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <Infinity className="h-6 w-6 mr-2 text-secondary" strokeWidth={2.5} />
+            <img 
+              src="/lovable-uploads/3558bdbb-2b38-43f9-a2ab-b18deedb6869.png" 
+              alt="Sofitel logo" 
+              className="h-6 w-6 mr-2"
+            />
             <span className="font-playfair text-xl font-bold text-primary">Sofitel Frankfurt Opera</span>
           </Link>
 
