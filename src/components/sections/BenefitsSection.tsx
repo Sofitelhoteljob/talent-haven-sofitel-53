@@ -9,7 +9,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { ImageLoader } from "@/components/ui/image-loader";
 
 const benefits = [
   {
@@ -75,6 +76,7 @@ const carouselImages = [
 
 export const BenefitsSection = () => {
   const [imagesLoaded, setImagesLoaded] = useState<boolean[]>(Array(carouselImages.length).fill(false));
+  const imageRefs = useRef<(HTMLDivElement | null)[]>(Array(carouselImages.length).fill(null));
   
   // Preload first 3 images, load others when component mounts
   useEffect(() => {
@@ -93,8 +95,38 @@ export const BenefitsSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Setup intersection observer after component mounts
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    
+    imageRefs.current.forEach((ref, index) => {
+      if (!ref) return;
+      
+      // Skip the first 3 images as they're preloaded
+      if (index < 3) return;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            handleImageVisible(index);
+            // Disconnect once observed
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      observer.observe(ref);
+      observers.push(observer);
+    });
+    
+    // Cleanup observers on unmount
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
   // Function to handle image loading by index
-  const handleImageVisible = (index: number) => {
+  const handleImageVisible = useCallback((index: number) => {
     if (!imagesLoaded[index]) {
       setImagesLoaded(prev => {
         const newState = [...prev];
@@ -102,7 +134,7 @@ export const BenefitsSection = () => {
         return newState;
       });
     }
-  };
+  }, [imagesLoaded]);
 
   return (
     <section className="py-20 bg-white">
@@ -148,10 +180,10 @@ export const BenefitsSection = () => {
                   <div 
                     className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100"
                     onMouseEnter={() => handleImageVisible(index)}
-                    onIntersectionChange={() => handleImageVisible(index)}
+                    ref={el => imageRefs.current[index] = el}
                   >
                     {imagesLoaded[index] ? (
-                      <img
+                      <ImageLoader
                         src={image.src}
                         alt={image.alt}
                         loading={index < 3 ? "eager" : "lazy"}
