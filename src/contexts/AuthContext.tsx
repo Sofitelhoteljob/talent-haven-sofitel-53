@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext } from 'react';
 import { useAuthState } from '@/hooks/useAuthState';
-import { loginUser, signupUser, logoutUser, sendPasswordReset } from '@/utils/authHelpers';
+import { loginUser, signupUser, logoutUser, sendPasswordReset } from '@/utils/auth';
 import { AuthContextType, UserProfile } from '@/types/auth';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
