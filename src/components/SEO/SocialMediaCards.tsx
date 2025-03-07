@@ -10,6 +10,9 @@ interface SocialMediaCardsProps {
   type?: string;
   twitterCard?: 'summary' | 'summary_large_image' | 'app' | 'player';
   siteName?: string;
+  keywords?: string;
+  author?: string;
+  language?: string;
 }
 
 export const SocialMediaCards = ({
@@ -19,7 +22,10 @@ export const SocialMediaCards = ({
   url,
   type = 'website',
   twitterCard = 'summary_large_image',
-  siteName = 'Sofitel Frankfurt Opera'
+  siteName = 'Sofitel Frankfurt Opera',
+  keywords = 'luxury hospitality jobs, hotel career, Sofitel careers, Frankfurt employment',
+  author = 'Sofitel Frankfurt Opera',
+  language = 'en'
 }: SocialMediaCardsProps) => {
   // Ensure we have an absolute URL for the image
   const absoluteImageUrl = image.startsWith('http') 
@@ -33,6 +39,13 @@ export const SocialMediaCards = ({
 
   return (
     <Helmet>
+      {/* Basic SEO */}
+      <meta name="keywords" content={keywords} />
+      <meta name="author" content={author} />
+      <meta name="language" content={language} />
+      <meta name="robots" content="index, follow" />
+      <meta name="revisit-after" content="7 days" />
+      
       {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={absoluteUrl} />
@@ -40,6 +53,7 @@ export const SocialMediaCards = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={absoluteImageUrl} />
       <meta property="og:site_name" content={siteName} />
+      <meta property="og:locale" content="en_US" />
       
       {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
@@ -47,6 +61,7 @@ export const SocialMediaCards = ({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={absoluteImageUrl} />
+      <meta name="twitter:site" content="@SofitelFrankfurt" />
       
       {/* LinkedIn */}
       <meta property="linkedin:title" content={title} />
