@@ -8,7 +8,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { ImageLoader } from "@/components/ui/image-loader";
 
 interface Testimonial {
   quote: string;
@@ -42,15 +41,6 @@ export const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) 
                   </div>
                   <p className="italic text-gray-700 mb-6 flex-grow">"{testimonial.quote}"</p>
                   <div className="flex items-center">
-                    <div className="w-12 h-12 rounded-full overflow-hidden mr-4 bg-gray-100">
-                      <ImageLoader
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        width="48"
-                        height="48"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
                     <div>
                       <p className="font-semibold">{testimonial.name}</p>
                       <p className="text-sm text-muted-foreground">{testimonial.position}</p>
