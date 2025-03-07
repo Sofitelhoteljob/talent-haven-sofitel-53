@@ -9,6 +9,7 @@ import { ProgramBenefits } from "@/components/development-program/ProgramBenefit
 import { FAQ } from "@/components/development-program/FAQ";
 import { CTASection } from "@/components/development-program/CTASection";
 import { Helmet } from "react-helmet-async";
+import MapSection from "@/components/Map";
 
 const DevelopmentProgram = () => {
   return (
@@ -34,6 +35,7 @@ const DevelopmentProgram = () => {
         <ProgramBenefits />
         <FAQ />
         <CTASection />
+        <MapSection />
         <Footer />
       </div>
     </div>
