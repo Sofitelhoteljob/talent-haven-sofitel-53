@@ -6,7 +6,6 @@ import { MapPin, Mail, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { StructuredData } from "@/components/SEO/StructuredData";
 import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
-
 const Contact = () => {
   const hotelData = {
     "@type": "Hotel",
@@ -60,17 +59,13 @@ const Contact = () => {
       name: "Contact Recruitment Team"
     }
   };
-
-  const handleCareerClick = () => {
-    window.open('https://careers.accor.com/global/en/sofitel-jobs', '_blank');
-  };
-
   return <div className="min-h-screen bg-background">
       <Helmet>
         <title>Contact Us | Sofitel Frankfurt Opera Careers - Recruitment Team</title>
         <meta name="description" content="Get in touch with our recruitment team at Sofitel Frankfurt Opera. Find contact details for career inquiries, job applications, and internship opportunities at our luxury hotel in the heart of Frankfurt. Our team is ready to assist you with your hospitality career journey." />
         <meta name="keywords" content="contact Sofitel Frankfurt, luxury hotel recruitment, hospitality career contact, hotel job inquiries, Sofitel HR department, Frankfurt hotel employment contact, hospitality recruitment team, hotel internship application, Sofitel careers contact, luxury hospitality jobs Frankfurt, hotel application information, hospitality employment opportunities" />
         
+        {/* Additional SEO meta tags */}
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
@@ -115,7 +110,7 @@ const Contact = () => {
               <p className="text-muted-foreground mb-4">
                 Interested in joining our team? We're always looking for talented individuals who are passionate about hospitality.
               </p>
-              <Button onClick={handleCareerClick} className="w-full bg-secondary hover:bg-secondary/90">
+              <Button onClick={() => window.location.href = 'https://careers.accor.com/global/en/sofitel-jobs'} className="w-full bg-secondary hover:bg-secondary/90">
                 View Career Opportunities
               </Button>
             </div>
@@ -126,5 +121,4 @@ const Contact = () => {
       <Footer />
     </div>;
 };
-
 export default Contact;
