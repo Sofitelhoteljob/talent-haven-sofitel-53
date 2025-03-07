@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CarouselImage {
   src: string;
@@ -26,9 +27,11 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
     const timer = setTimeout(() => {
       setImagesLoaded(prev => {
         const newState = [...prev];
+        // Load first 4 images initially for a better experience
         newState[0] = true;
         newState[1] = true;
         newState[2] = true;
+        newState[3] = true;
         return newState;
       });
     }, 100);
@@ -42,7 +45,7 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
     imageRefs.current.forEach((ref, index) => {
       if (!ref) return;
       
-      if (index < 3) return;
+      if (index < 4) return; // Skip first 4 images as they are loaded initially
       
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -74,6 +77,7 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
 
   return (
     <div className="mt-16 relative">
+      <h3 className="text-2xl font-playfair font-semibold text-center mb-6">Experience Our World-Class Facilities</h3>
       <Carousel
         opts={{
           align: "start",
@@ -96,7 +100,7 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
                   <ImageLoader
                     src={image.src}
                     alt={image.alt}
-                    loading={index < 3 ? "eager" : "lazy"}
+                    loading={index < 4 ? "eager" : "lazy"}
                     width="400"
                     height="300"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"

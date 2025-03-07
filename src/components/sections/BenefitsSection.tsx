@@ -29,7 +29,10 @@ export const BenefitsSection = () => {
         </div>
         
         <TestimonialCarousel testimonials={testimonials} />
-        <ImageCarousel images={carouselImages} />
+        
+        <div className="border-t border-gray-100 pt-16">
+          <ImageCarousel images={carouselImages} />
+        </div>
       </div>
     </section>
   );
