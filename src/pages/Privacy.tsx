@@ -2,6 +2,7 @@
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
 
 const Privacy = () => {
   return (
@@ -13,6 +14,12 @@ const Privacy = () => {
           content="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information."
         />
       </Helmet>
+      <SocialMediaCards 
+        title="Privacy Policy | Sofitel Frankfurt Opera"
+        description="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information."
+        image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png"
+        url="/privacy"
+      />
 
       <Navbar />
       

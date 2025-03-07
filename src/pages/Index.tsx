@@ -1,4 +1,3 @@
-
 import { HeroSection } from "@/components/sections/HeroSection";
 import { BenefitsSection } from "@/components/sections/BenefitsSection";
 import { JobListingsSection } from "@/components/sections/JobListingsSection";
@@ -8,6 +7,7 @@ import { Navbar } from "@/components/Navbar";
 import { GoogleMap } from "@/components/GoogleMap";
 import { Helmet } from "react-helmet-async";
 import { StructuredData } from "@/components/SEO/StructuredData";
+import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
 
 const Index = () => {
   const organizationData = {
@@ -39,20 +39,18 @@ const Index = () => {
         <title>Careers at Sofitel Frankfurt Opera | Luxury Hospitality Jobs</title>
         <meta name="description" content="Join our team at Sofitel Frankfurt Opera and build your career in luxury hospitality. Explore current job openings and our Global Talent Program." />
         <meta name="keywords" content="Sofitel Frankfurt, luxury hotel careers, hospitality jobs, hotel employment, Frankfurt jobs" />
-        <meta property="og:title" content="Careers at Sofitel Frankfurt Opera" />
-        <meta property="og:description" content="Join our team at Sofitel Frankfurt Opera and build your career in luxury hospitality." />
-        <meta property="og:image" content="/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png" />
-        <meta property="og:url" content="https://sofitel-frankfurt-careers.com" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://sofitel-frankfurt-careers.com" />
         
-        {/* Additional SEO meta tags */}
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
         <meta name="author" content="Sofitel Frankfurt Opera" />
       </Helmet>
+      <SocialMediaCards 
+        title="Careers at Sofitel Frankfurt Opera | Luxury Hospitality Jobs"
+        description="Join our team at Sofitel Frankfurt Opera and build your career in luxury hospitality. Explore current job openings and our Global Talent Program."
+        image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png"
+        url="/"
+      />
       <StructuredData type="Organization" data={organizationData} />
       <Navbar />
       <div className="pt-16"> {/* Add padding to account for fixed navbar */}

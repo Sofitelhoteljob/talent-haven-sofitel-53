@@ -1,4 +1,3 @@
-
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { ProgramHero } from "@/components/development-program/ProgramHero";
@@ -11,6 +10,7 @@ import { CTASection } from "@/components/development-program/CTASection";
 import { GoogleMap } from "@/components/GoogleMap";
 import { Helmet } from "react-helmet-async";
 import { StructuredData } from "@/components/SEO/StructuredData";
+import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
 
 const DevelopmentProgram = () => {
   const jobPostingData = {
@@ -71,20 +71,18 @@ const DevelopmentProgram = () => {
         <title>Global Talent Program | Sofitel Frankfurt Opera</title>
         <meta name="description" content="Join our prestigious Global Talent Program at Sofitel Frankfurt Opera and build an international career in luxury hospitality. Applications open for our development program." />
         <meta name="keywords" content="global talent program, hospitality career development, luxury hotel internship, Sofitel development program, international hospitality training" />
-        <meta property="og:title" content="Global Talent Program | Sofitel Frankfurt Opera" />
-        <meta property="og:description" content="Join our prestigious Global Talent Program and build an international career in luxury hospitality." />
-        <meta property="og:image" content="/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png" />
-        <meta property="og:url" content="https://sofitel-frankfurt-careers.com/development-program" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <link rel="canonical" href="https://sofitel-frankfurt-careers.com/development-program" />
         
-        {/* Additional SEO meta tags */}
         <meta name="robots" content="index, follow" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
         <meta name="author" content="Sofitel Frankfurt Opera" />
       </Helmet>
+      <SocialMediaCards 
+        title="Global Talent Program | Sofitel Frankfurt Opera"
+        description="Join our prestigious Global Talent Program and build an international career in luxury hospitality. Discover opportunities for professional growth."
+        image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png"
+        url="/development-program"
+      />
       <StructuredData type="JobPosting" data={jobPostingData} />
       <StructuredData type="FAQPage" data={faqData} />
       <Navbar />
