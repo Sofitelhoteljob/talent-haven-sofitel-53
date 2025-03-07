@@ -26,8 +26,8 @@ export const benefits = [
 
 export const carouselImages = [
   {
-    src: "/lovable-uploads/cb34e963-852e-4568-a5b6-cba5db17673d.png",
-    alt: "Luxury lounge area with yellow chairs"
+    src: "/lovable-uploads/d4d5f30c-9099-4c31-be56-35b7cf357273.png",
+    alt: "Luxury hotel dining hall with elegant table settings"
   },
   {
     src: "/lovable-uploads/79292aec-c144-4e09-b99f-d3320cab2a1f.png",
