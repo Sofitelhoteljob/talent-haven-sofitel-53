@@ -21,6 +21,46 @@ export const BondStatusTab = () => {
   const bondAmount = "€1,000";
   const paymentDeadline = "August 15, 2023";
   
+  // Helper function to render the status icon
+  const renderStatusIcon = () => {
+    switch(bondStatus) {
+      case "pending":
+        return <AlertCircle className="h-12 w-12 text-amber-500" />;
+      case "paid":
+        return <CheckCircle2 className="h-12 w-12 text-green-500" />;
+      case "refunded":
+        return <RefreshCcw className="h-12 w-12 text-blue-500" />;
+      default:
+        return null;
+    }
+  };
+
+  // Helper function to get badge variant based on status
+  const getBadgeVariant = () => {
+    switch(bondStatus) {
+      case "paid":
+        return "default";
+      case "refunded":
+        return "secondary";
+      default:
+        return "outline";
+    }
+  };
+
+  // Helper function to get badge text based on status
+  const getBadgeText = () => {
+    switch(bondStatus) {
+      case "pending":
+        return "Pending Payment";
+      case "paid":
+        return "Paid";
+      case "refunded":
+        return "Refunded";
+      default:
+        return "";
+    }
+  };
+  
   return (
     <div className="space-y-6">
       <Card>
@@ -34,15 +74,7 @@ export const BondStatusTab = () => {
           <div className="flex items-center justify-center py-6">
             <div className="w-32 h-32 relative">
               <div className="absolute inset-0 flex items-center justify-center">
-                {bondStatus === "pending" && (
-                  <AlertCircle className="h-12 w-12 text-amber-500" />
-                )}
-                {bondStatus === "paid" && (
-                  <CheckCircle2 className="h-12 w-12 text-green-500" />
-                )}
-                {bondStatus === "refunded" && (
-                  <RefreshCcw className="h-12 w-12 text-blue-500" />
-                )}
+                {renderStatusIcon()}
               </div>
             </div>
           </div>
@@ -54,14 +86,8 @@ export const BondStatusTab = () => {
             </div>
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-sm font-medium">Status:</h3>
-              <Badge variant={
-                bondStatus === "paid" ? "default" : 
-                bondStatus === "refunded" ? "secondary" : 
-                "outline"
-              }>
-                {bondStatus === "pending" && "Pending Payment"}
-                {bondStatus === "paid" && "Paid"}
-                {bondStatus === "refunded" && "Refunded"}
+              <Badge variant={getBadgeVariant()}>
+                {getBadgeText()}
               </Badge>
             </div>
             {bondStatus === "pending" && (
