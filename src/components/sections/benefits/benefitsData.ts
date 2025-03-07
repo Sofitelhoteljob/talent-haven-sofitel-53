@@ -26,18 +26,6 @@ export const benefits = [
 
 export const carouselImages = [
   {
-    src: "/lovable-uploads/32434d10-de87-4a17-8864-8c385028a605.png",
-    alt: "Sofitel hotel exterior and sign"
-  },
-  {
-    src: "/lovable-uploads/e7704bf3-8e6f-49ef-922b-0055e02db30b.png",
-    alt: "Elegant conference room setup"
-  },
-  {
-    src: "/lovable-uploads/1f53e4c5-2945-4897-a382-478942e75b46.png",
-    alt: "Luxurious dining area with round tables"
-  },
-  {
     src: "/lovable-uploads/cb34e963-852e-4568-a5b6-cba5db17673d.png",
     alt: "Luxury lounge area with yellow chairs"
   },
@@ -95,4 +83,3 @@ export const testimonials = [
     avatar: "/lovable-uploads/b64348a5-7bcb-46f4-a1e3-ccf29ebafd69.png"
   }
 ];
-
