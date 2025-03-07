@@ -12,9 +12,12 @@ import {
   RefreshCcw
 } from "lucide-react";
 
+// Define proper bond status type to fix type comparison issues
+type BondStatus = 'pending' | 'paid' | 'refunded';
+
 export const BondStatusTab = () => {
   // Mock bond data
-  const bondStatus = "pending"; // could be 'pending', 'paid', 'refunded'
+  const bondStatus: BondStatus = "pending"; // could be 'pending', 'paid', 'refunded'
   const bondAmount = "€1,000";
   const paymentDeadline = "August 15, 2023";
   
@@ -52,8 +55,8 @@ export const BondStatusTab = () => {
             <div className="flex justify-between items-center mb-2">
               <h3 className="text-sm font-medium">Status:</h3>
               <Badge variant={
-                bondStatus === "paid" ? "success" : 
-                bondStatus === "refunded" ? "default" : 
+                bondStatus === "paid" ? "default" : 
+                bondStatus === "refunded" ? "secondary" : 
                 "outline"
               }>
                 {bondStatus === "pending" && "Pending Payment"}

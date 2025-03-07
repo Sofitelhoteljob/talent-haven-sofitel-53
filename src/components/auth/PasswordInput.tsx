@@ -10,6 +10,9 @@ interface PasswordInputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   required?: boolean;
+  showPassword?: boolean;
+  toggleShowPassword?: () => void;
+  error?: string;
 }
 
 export const PasswordInput = ({
@@ -18,14 +21,27 @@ export const PasswordInput = ({
   onChange,
   placeholder = "••••••••",
   required = true,
+  showPassword = false,
+  toggleShowPassword,
+  error,
 }: PasswordInputProps) => {
-  const [showPassword, setShowPassword] = useState(false);
+  const [localShowPassword, setLocalShowPassword] = useState(showPassword);
+  
+  const handleTogglePassword = () => {
+    if (toggleShowPassword) {
+      toggleShowPassword();
+    } else {
+      setLocalShowPassword(!localShowPassword);
+    }
+  };
+
+  const shouldShowPassword = showPassword !== undefined ? showPassword : localShowPassword;
 
   return (
     <div className="relative">
       <Input
         id={id}
-        type={showPassword ? "text" : "password"}
+        type={shouldShowPassword ? "text" : "password"}
         value={value}
         onChange={onChange}
         placeholder={placeholder}
@@ -37,11 +53,12 @@ export const PasswordInput = ({
         type="button"
         variant="ghost"
         size="icon"
-        onClick={() => setShowPassword(!showPassword)}
+        onClick={handleTogglePassword}
         className="absolute right-0 top-0 h-full"
       >
-        {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+        {shouldShowPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
       </Button>
+      {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 interface FormFieldProps {
   id: string;
   label: string;
+  type?: string;
   error?: string;
   children: ReactNode;
 }

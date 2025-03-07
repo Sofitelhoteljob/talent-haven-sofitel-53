@@ -75,12 +75,16 @@ export const LoginForm = () => {
               <FormField
                 id="email"
                 label="Email"
-                type="email"
-                placeholder="your.email@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
                 error={errors.email}
-              />
+              >
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </FormField>
               
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
