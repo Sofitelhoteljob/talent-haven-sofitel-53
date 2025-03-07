@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DetailedInfo } from "./types";
+import { DetailedOverview } from "./DetailedOverview";
 
 interface ProgramInfoProps {
   focusAreas: string[];
