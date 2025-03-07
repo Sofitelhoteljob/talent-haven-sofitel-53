@@ -6,7 +6,6 @@ import { QuickApplySection } from "@/components/sections/QuickApplySection";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { Helmet } from "react-helmet-async";
-import MapSection from "@/components/Map";
 
 const Index = () => {
   return (
@@ -29,7 +28,6 @@ const Index = () => {
         <BenefitsSection />
         <JobListingsSection />
         <QuickApplySection />
-        <MapSection />
         <Footer />
       </div>
     </div>
