@@ -1,3 +1,4 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { MapPin, Mail, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import { StructuredData } from "@/components/SEO/StructuredData";
 import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
+
 const Contact = () => {
   const hotelData = {
     "@type": "Hotel",
@@ -59,6 +61,7 @@ const Contact = () => {
       name: "Contact Recruitment Team"
     }
   };
+  
   return <div className="min-h-screen bg-background">
       <Helmet>
         <title>Contact Us | Sofitel Frankfurt Opera Careers - Recruitment Team</title>
@@ -110,7 +113,10 @@ const Contact = () => {
               <p className="text-muted-foreground mb-4">
                 Interested in joining our team? We're always looking for talented individuals who are passionate about hospitality.
               </p>
-              <Button onClick={() => window.location.href = 'https://careers.accor.com/global/en/sofitel-jobs'} className="w-full bg-secondary hover:bg-secondary/90">
+              <Button 
+                onClick={() => window.location.href = 'mailto:Jobssofitelfrankfurtopera@gmail.com?subject=Career Opportunity Inquiry'} 
+                className="w-full bg-secondary hover:bg-secondary/90"
+              >
                 View Career Opportunities
               </Button>
             </div>
@@ -121,4 +127,5 @@ const Contact = () => {
       <Footer />
     </div>;
 };
+
 export default Contact;
