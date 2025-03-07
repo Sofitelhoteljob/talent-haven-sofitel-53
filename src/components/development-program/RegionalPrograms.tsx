@@ -1,3 +1,4 @@
+
 import { Badge } from "@/components/ui/badge";
 import { RegionalProgram } from "./regional-program";
 
@@ -158,7 +159,75 @@ export const RegionalPrograms = () => {
         "Specialized training in Asian-European fusion hospitality",
         "Career advancement pathways within Accor's Asian properties",
         "Community leadership development"
-      ]
+      ],
+      detailedInfo: {
+        vision: "To empower Asian talent through education, mentorship, and hands-on experience in luxury hospitality while promoting gender equality, rural economic growth, and sustainable practices.",
+        coreValues: ["Gender equality and women's empowerment", "Rural economic development and skill-building", "Cultural preservation and innovation"],
+        targetCountries: [
+          {
+            name: "India",
+            focus: "Gender equality and rural economic growth",
+            initiatives: [
+              "Partnerships with local vocational schools and NGOs to provide hospitality training",
+              "Special programs targeting women from rural areas to enter the workforce",
+              "Workshops on sustainable tourism practices, such as eco-friendly lodging and community-based tourism"
+            ]
+          },
+          {
+            name: "Thailand",
+            focus: "Hospitality skill-building and cultural diplomacy",
+            initiatives: [
+              "Training modules on luxury service standards and Thai cultural integration",
+              "Opportunities for participants to showcase Thai traditions at Sofitel Frankfurt Opera",
+              "Mentorship programs for young professionals in underserved regions"
+            ]
+          },
+          {
+            name: "The Philippines",
+            focus: "Gender equality and workforce development",
+            initiatives: [
+              "Collaboration with local universities and government agencies to identify candidates",
+              "Training programs focused on leadership skills and career advancement for women",
+              "Celebrating Filipino culture, music, and cuisine within the Sofitel brand"
+            ]
+          },
+          {
+            name: "Vietnam",
+            focus: "Rural economic growth and sustainability",
+            initiatives: [
+              "Programs to empower youth from rural areas with hospitality skills",
+              "Training in eco-friendly hotel operations and waste management",
+              "Opportunities for participants to act as cultural ambassadors for Vietnamese traditions"
+            ]
+          }
+        ],
+        successStories: [
+          {
+            name: "Priya from India",
+            background: "Grew up in a rural village with limited access to formal education",
+            journey: "Joined the program after completing a vocational course in hospitality",
+            outcome: "Now works as a Guest Relations Manager at Sofitel Frankfurt Opera and advocates for rural tourism in her home country"
+          },
+          {
+            name: "Niran from Thailand",
+            background: "Passionate about preserving Thai traditions in hospitality",
+            journey: "Trained in luxury service standards and brought his expertise to Frankfurt",
+            outcome: "Leads cultural workshops for colleagues and guests, showcasing Thai heritage"
+          },
+          {
+            name: "Maria from The Philippines",
+            background: "Overcame gender barriers to pursue a career in hospitality",
+            journey: "Joined the program and received mentorship to advance her skills",
+            outcome: "Now heads the F&B department at Sofitel Frankfurt Opera, introducing guests to Filipino flavors and traditions"
+          },
+          {
+            name: "Linh from Vietnam",
+            background: "From a rural farming community, sought opportunities to improve her family's livelihood",
+            journey: "Trained in sustainable tourism practices and joined Sofitel's team",
+            outcome: "Promotes eco-friendly tourism practices and acts as a cultural ambassador for Vietnam"
+          }
+        ]
+      }
     }
   ];
 

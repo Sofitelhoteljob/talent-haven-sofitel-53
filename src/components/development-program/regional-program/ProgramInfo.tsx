@@ -41,7 +41,7 @@ export const ProgramInfo = ({
         </ul>
       </div>
 
-      {detailedInfo && (region === "Africa" || region === "America") && (
+      {detailedInfo && (region === "Africa" || region === "America" || region === "Asia") && (
         <div className="mt-6">
           <Button 
             variant="outline"
