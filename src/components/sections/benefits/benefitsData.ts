@@ -26,8 +26,16 @@ export const benefits = [
 
 export const carouselImages = [
   {
-    src: "/lovable-uploads/cb34e963-852e-4568-a5b6-cba5db17673d.png",
-    alt: "Luxury lounge area with yellow chairs"
+    src: "/lovable-uploads/bea6904e-c603-4408-a960-cc7f8b14c9e9.png",
+    alt: "Sofitel Frankfurt Opera elegant dining hall"
+  },
+  {
+    src: "/lovable-uploads/8c4239cf-b955-4bf8-9a49-5a454761aada.png",
+    alt: "Sofitel Frankfurt Opera exterior with logo"
+  },
+  {
+    src: "/lovable-uploads/427f06a8-ac06-4a13-b7f0-31e6a6285dfa.png",
+    alt: "Sofitel Frankfurt Opera building at night"
   },
   {
     src: "/lovable-uploads/79292aec-c144-4e09-b99f-d3320cab2a1f.png",
@@ -50,16 +58,8 @@ export const carouselImages = [
     alt: "Couple in bathrobes enjoying view"
   },
   {
-    src: "/lovable-uploads/76404b92-ed4b-4b2e-8f74-132d4648d5fb.png",
-    alt: "Couple dancing in hotel room"
-  },
-  {
     src: "/lovable-uploads/93088b86-2ffd-4b71-8238-907a99489b17.png",
     alt: "Historic Frankfurt Opera House with bicycles"
-  },
-  {
-    src: "/lovable-uploads/84329b53-2b02-474b-84a3-648b8f92958a.png",
-    alt: "Couple dining at luxury restaurant"
   }
 ];
 

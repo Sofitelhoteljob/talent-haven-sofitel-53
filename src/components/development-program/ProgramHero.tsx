@@ -5,21 +5,50 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 
 export const ProgramHero = () => {
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  
+  const images = [
+    '/lovable-uploads/8c4239cf-b955-4bf8-9a49-5a454761aada.png',
+    '/lovable-uploads/bea6904e-c603-4408-a960-cc7f8b14c9e9.png',
+    '/lovable-uploads/427f06a8-ac06-4a13-b7f0-31e6a6285dfa.png'
+  ];
   
   useEffect(() => {
-    // Preload the hero image
-    const img = new Image();
-    img.src = '/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png';
-    img.onload = () => setImageLoaded(true);
+    // Preload all hero images
+    const imageObjects = images.map(src => {
+      const img = new Image();
+      img.src = src;
+      return img;
+    });
     
-    // Set a timeout to show a placeholder if image takes too long
+    Promise.all(
+      imageObjects.map(img => {
+        return new Promise(resolve => {
+          img.onload = resolve;
+        });
+      })
+    ).then(() => {
+      setImagesLoaded(true);
+    });
+    
+    // Set a timeout to show a placeholder if images take too long
     const timeout = setTimeout(() => {
-      if (!imageLoaded) setImageLoaded(true);
-    }, 1000);
+      if (!imagesLoaded) setImagesLoaded(true);
+    }, 2000);
     
     return () => clearTimeout(timeout);
   }, []);
+
+  useEffect(() => {
+    if (!imagesLoaded) return;
+    
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [imagesLoaded, images.length]);
 
   const scrollToApply = () => {
     const element = document.getElementById('apply-now');
@@ -30,19 +59,24 @@ export const ProgramHero = () => {
 
   return (
     <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
-      {imageLoaded ? (
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat animate-fade-in"
-          style={{
-            backgroundImage: `url('/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png')`,
-            filter: "brightness(0.6)",
-            backgroundPosition: "center",
-            backgroundSize: "cover"
-          }}
-          aria-label="Background image of Sofitel Frankfurt Opera"
-        />
+      {imagesLoaded ? (
+        images.map((image, index) => (
+          <div 
+            key={image}
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 animate-fade-in"
+            style={{
+              backgroundImage: `url('${image}')`,
+              filter: "brightness(0.6)",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              opacity: currentImageIndex === index ? 1 : 0,
+              zIndex: currentImageIndex === index ? 1 : 0
+            }}
+            aria-label={`Sofitel Frankfurt Opera hotel image ${index + 1}`}
+          />
+        ))
       ) : (
-        <div className="absolute inset-0 bg-gray-400"></div>
+        <div className="absolute inset-0 bg-gray-700"></div>
       )}
       <div className="relative container mx-auto px-6 text-center text-white z-10">
         <Badge className="bg-secondary text-white mb-6 animate-fade-in">Global Talent Initiative</Badge>
