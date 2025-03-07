@@ -1,6 +1,5 @@
-
 import { Badge } from "@/components/ui/badge";
-import { RegionalProgram } from "./RegionalProgram";
+import { RegionalProgram } from "./regional-program";
 
 export const RegionalPrograms = () => {
   const programs = [
