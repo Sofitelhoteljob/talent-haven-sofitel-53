@@ -11,7 +11,7 @@ export const fetchUserProfile = async (userId: string): Promise<UserProfile | nu
   try {
     // Try to query user_profiles first (raw query to avoid TypeScript errors)
     const { data: userProfileData, error: userProfileError } = await supabase
-      .from('user_profiles')
+      .from('user_profiles' as any)
       .select('*')
       .eq('id', userId)
       .maybeSingle();
@@ -19,7 +19,7 @@ export const fetchUserProfile = async (userId: string): Promise<UserProfile | nu
     // If user_profiles query failed, try profiles
     if (userProfileError || !userProfileData) {
       const { data: profileData, error: profileError } = await supabase
-        .from('profiles')
+        .from('profiles' as any)
         .select('*')
         .eq('id', userId)
         .maybeSingle();
@@ -46,7 +46,7 @@ export const createUserProfile = async (
   try {
     // Try user_profiles first
     let { error: userProfilesError } = await supabase
-      .from('user_profiles')
+      .from('user_profiles' as any)
       .insert({
         id: userId,
         full_name: userData.full_name,
@@ -60,7 +60,7 @@ export const createUserProfile = async (
     if (userProfilesError) {
       console.log("Falling back to profiles table");
       const { error: profilesError } = await supabase
-        .from('profiles')
+        .from('profiles' as any)
         .insert({
           id: userId,
           full_name: userData.full_name,

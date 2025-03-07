@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { ProfileData } from "@/types/auth";
 
 export const useSignupForm = () => {
   const [fullName, setFullName] = useState("");
@@ -90,13 +91,16 @@ export const useSignupForm = () => {
     setIsLoading(true);
     
     try {
-      await signup(email, password, {
+      // Create user profile data object that matches the ProfileData type
+      const profileData: ProfileData = {
         email,
         full_name: fullName,
         country,
         phone,
         preferred_language: preferredLanguage
-      });
+      };
+      
+      await signup(email, password, profileData);
       
       navigate("/login"); // Redirect to login page after successful signup
     } catch (error) {
