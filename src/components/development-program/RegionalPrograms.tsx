@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { RegionalProgram } from "./RegionalProgram";
 
@@ -21,7 +20,54 @@ export const RegionalPrograms = () => {
         "Specialized training in European luxury hospitality standards",
         "Mentorship from senior Accor hospitality professionals",
         "Housing assistance and relocation support"
-      ]
+      ],
+      detailedInfo: {
+        vision: "To empower African youth through education, mentorship, and hands-on experience in luxury hospitality while promoting sustainable tourism practices.",
+        coreValues: ["Youth empowerment", "Cultural preservation and exchange", "Environmental sustainability", "Professional growth and career advancement"],
+        targetCountries: [
+          {
+            name: "Uganda",
+            focus: "Youth empowerment and rural economic development",
+            initiatives: [
+              "Partnerships with local vocational schools to provide hospitality training",
+              "Mentorship programs for young women and men from rural areas",
+              "Workshops on sustainable tourism practices"
+            ]
+          },
+          {
+            name: "South Africa",
+            focus: "Skills development and workforce diversity",
+            initiatives: [
+              "Collaboration with historically disadvantaged institutions",
+              "Training modules on luxury service standards and leadership skills",
+              "Opportunities to showcase South African art, music, and cuisine"
+            ]
+          },
+          {
+            name: "Morocco",
+            focus: "Sustainable tourism and cultural heritage",
+            initiatives: [
+              "Programs focused on preserving Moroccan traditions in hospitality",
+              "Training in eco-friendly hotel operations and waste management",
+              "Exposure to international markets through Accor Group's global network"
+            ]
+          }
+        ],
+        successStories: [
+          {
+            name: "Sarah from Uganda",
+            background: "Grew up in a rural village with limited access to formal education",
+            journey: "Joined the program after completing a vocational course in hospitality",
+            outcome: "Now works as a Guest Relations Manager at Sofitel Frankfurt Opera and advocates for sustainable tourism in her home country"
+          },
+          {
+            name: "Ahmed from Morocco",
+            background: "Passionate about preserving Moroccan traditions in hospitality",
+            journey: "Trained in eco-friendly hotel operations and brought his expertise to Frankfurt",
+            outcome: "Leads cultural workshops for colleagues and guests, showcasing Moroccan heritage"
+          }
+        ]
+      }
     },
     {
       region: "America",
@@ -85,6 +131,7 @@ export const RegionalPrograms = () => {
               imageSrc={program.imageSrc}
               focusAreas={program.focusAreas}
               benefits={program.benefits}
+              detailedInfo={program.detailedInfo}
             />
           ))}
         </div>

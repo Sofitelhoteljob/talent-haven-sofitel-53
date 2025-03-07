@@ -3,8 +3,28 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, User } from "lucide-react";
 import { ImageLoader } from "@/components/ui/image-loader";
+
+interface CountryInfo {
+  name: string;
+  focus: string;
+  initiatives: string[];
+}
+
+interface SuccessStory {
+  name: string;
+  background: string;
+  journey: string;
+  outcome: string;
+}
+
+interface DetailedInfo {
+  vision?: string;
+  coreValues?: string[];
+  targetCountries?: CountryInfo[];
+  successStories?: SuccessStory[];
+}
 
 interface RegionalProgramProps {
   region: string;
@@ -14,6 +34,7 @@ interface RegionalProgramProps {
   imageSrc: string;
   focusAreas: string[];
   benefits: string[];
+  detailedInfo?: DetailedInfo;
 }
 
 export const RegionalProgram = ({
@@ -23,12 +44,18 @@ export const RegionalProgram = ({
   description,
   imageSrc,
   focusAreas,
-  benefits
+  benefits,
+  detailedInfo
 }: RegionalProgramProps) => {
   const [showFullInfo, setShowFullInfo] = useState(false);
+  const [showDetailedOverview, setShowDetailedOverview] = useState(false);
 
   const toggleInfoSection = () => {
     setShowFullInfo(prev => !prev);
+  };
+
+  const toggleDetailedOverview = () => {
+    setShowDetailedOverview(prev => !prev);
   };
 
   const scrollToApply = () => {
@@ -86,6 +113,83 @@ export const RegionalProgram = ({
                       ))}
                     </ul>
                   </div>
+
+                  {detailedInfo && region === "Africa" && (
+                    <div className="mt-6">
+                      <Button 
+                        variant="outline"
+                        onClick={toggleDetailedOverview}
+                        className="w-full justify-between"
+                      >
+                        <span>Detailed Program Overview</span>
+                        {showDetailedOverview ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                      </Button>
+                      
+                      {showDetailedOverview && (
+                        <div className="mt-4 space-y-6 bg-secondary/5 p-4 rounded-md animate-fade-in">
+                          {detailedInfo.vision && (
+                            <div>
+                              <h4 className="font-medium text-lg mb-2">Program Vision</h4>
+                              <p className="text-muted-foreground">{detailedInfo.vision}</p>
+                              
+                              {detailedInfo.coreValues && (
+                                <div className="mt-3">
+                                  <h5 className="font-medium">Core Values</h5>
+                                  <ul className="list-disc pl-5 text-muted-foreground mt-2">
+                                    {detailedInfo.coreValues.map((value, index) => (
+                                      <li key={index}>{value}</li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              )}
+                            </div>
+                          )}
+                          
+                          {detailedInfo.targetCountries && (
+                            <div>
+                              <h4 className="font-medium text-lg mb-2">Target Countries & Focus Areas</h4>
+                              <div className="space-y-4">
+                                {detailedInfo.targetCountries.map((country, index) => (
+                                  <div key={index} className="bg-white p-3 rounded-md shadow-sm">
+                                    <h5 className="font-medium">{country.name}</h5>
+                                    <p className="text-sm font-medium text-secondary">{country.focus}</p>
+                                    <ul className="list-disc pl-5 text-muted-foreground mt-2 text-sm">
+                                      {country.initiatives.map((initiative, idx) => (
+                                        <li key={idx}>{initiative}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                          
+                          {detailedInfo.successStories && (
+                            <div>
+                              <h4 className="font-medium text-lg mb-2">Success Stories</h4>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {detailedInfo.successStories.map((story, index) => (
+                                  <div key={index} className="bg-white p-3 rounded-md shadow-sm">
+                                    <div className="flex items-center mb-2">
+                                      <div className="h-8 w-8 bg-secondary/20 rounded-full flex items-center justify-center mr-2">
+                                        <User className="h-4 w-4 text-secondary" />
+                                      </div>
+                                      <h5 className="font-medium">{story.name}</h5>
+                                    </div>
+                                    <div className="space-y-1 text-sm text-muted-foreground">
+                                      <p><span className="font-medium">Background:</span> {story.background}</p>
+                                      <p><span className="font-medium">Journey:</span> {story.journey}</p>
+                                      <p><span className="font-medium">Outcome:</span> {story.outcome}</p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
