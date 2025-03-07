@@ -3,6 +3,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/components/ui/use-toast';
 
+// Update the user_profiles table in Supabase to include these fields
 export interface UserProfile {
   id: string;
   email: string;
@@ -75,8 +76,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUserProfile = async (userId: string) => {
     try {
+      // Need to create a custom table for user_profiles in Supabase
       const { data, error } = await supabase
-        .from('user_profiles')
+        .from('profiles')
         .select('*')
         .eq('id', userId)
         .single();
@@ -87,7 +89,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       if (data) {
-        setProfile(data as UserProfile);
+        setProfile(data as unknown as UserProfile);
       }
     } catch (error) {
       console.error("Error in profile fetch:", error);
@@ -141,12 +143,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (data.user) {
         // 2. Create user profile
         const { error: profileError } = await supabase
-          .from('user_profiles')
+          .from('profiles')
           .insert([
             {
               id: data.user.id,
-              email: userData.email,
               full_name: userData.full_name,
+              email: userData.email,
               country: userData.country,
               phone: userData.phone,
               preferred_language: userData.preferred_language,

@@ -2,6 +2,7 @@
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useFormContext } from "./FormContext";
+import { countries } from "@/data/countries";
 
 export const PersonalInfoStep = () => {
   const { formData, errors, handleInputChange, handleSelectChange } = useFormContext();
@@ -51,18 +52,12 @@ export const PersonalInfoStep = () => {
           <SelectTrigger id="country" className={`w-full ${errors.country ? "border-destructive" : ""}`}>
             <SelectValue placeholder="Select your country" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="Uganda">Uganda</SelectItem>
-            <SelectItem value="South Africa">South Africa</SelectItem>
-            <SelectItem value="Morocco">Morocco</SelectItem>
-            <SelectItem value="Brazil">Brazil</SelectItem>
-            <SelectItem value="Colombia">Colombia</SelectItem>
-            <SelectItem value="Argentina">Argentina</SelectItem>
-            <SelectItem value="India">India</SelectItem>
-            <SelectItem value="Thailand">Thailand</SelectItem>
-            <SelectItem value="Philippines">Philippines</SelectItem>
-            <SelectItem value="Vietnam">Vietnam</SelectItem>
-            <SelectItem value="Other">Other</SelectItem>
+          <SelectContent className="max-h-[200px]">
+            {countries.map((country) => (
+              <SelectItem key={country.code} value={country.name}>
+                {country.name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         {errors.country && <p className="text-xs text-destructive mt-1">{errors.country}</p>}

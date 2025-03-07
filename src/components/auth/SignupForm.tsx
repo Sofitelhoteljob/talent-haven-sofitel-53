@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, User, Mail, Phone, Flag, Globe, Key } from "lucide-react";
@@ -7,6 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { useAuth } from "@/contexts/AuthContext";
 import { countries } from "@/data/countries";
 import { languages } from "@/data/languages";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export const SignupForm = () => {
   const [fullName, setFullName] = useState("");
@@ -186,21 +188,22 @@ export const SignupForm = () => {
               <div className="space-y-2">
                 <label htmlFor="country" className="text-sm font-medium">Country</label>
                 <div className="relative">
-                  <select
-                    id="country"
+                  <Select
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
-                    required
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    onValueChange={setCountry}
                   >
-                    <option value="">Select Country</option>
-                    {countries.map((c) => (
-                      <option key={c.code} value={c.name}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                  <Flag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                    <SelectTrigger id="country" className="pl-10">
+                      <SelectValue placeholder="Select Country" />
+                    </SelectTrigger>
+                    <SelectContent className="max-h-[200px]">
+                      {countries.map((c) => (
+                        <SelectItem key={c.code} value={c.name}>
+                          {c.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Flag className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5 z-10" />
                 </div>
                 {errors.country && <p className="text-sm text-red-500">{errors.country}</p>}
               </div>
@@ -227,21 +230,22 @@ export const SignupForm = () => {
               <div className="space-y-2">
                 <label htmlFor="preferredLanguage" className="text-sm font-medium">Preferred Language</label>
                 <div className="relative">
-                  <select
-                    id="preferredLanguage"
+                  <Select
                     value={preferredLanguage}
-                    onChange={(e) => setPreferredLanguage(e.target.value)}
-                    required
-                    className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 pl-10 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    onValueChange={setPreferredLanguage}
                   >
-                    <option value="">Select Language</option>
-                    {languages.map((lang) => (
-                      <option key={lang.code} value={lang.code}>
-                        {lang.name}
-                      </option>
-                    ))}
-                  </select>
-                  <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5" />
+                    <SelectTrigger id="preferredLanguage" className="pl-10">
+                      <SelectValue placeholder="Select Language" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {languages.map((lang) => (
+                        <SelectItem key={lang.code} value={lang.code}>
+                          {lang.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Globe className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 h-5 w-5 z-10" />
                 </div>
                 {errors.preferredLanguage && <p className="text-sm text-red-500">{errors.preferredLanguage}</p>}
               </div>
