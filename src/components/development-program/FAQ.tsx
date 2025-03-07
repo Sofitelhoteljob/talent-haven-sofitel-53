@@ -1,4 +1,3 @@
-
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 
@@ -6,7 +5,11 @@ export const FAQ = () => {
   const faqs = [
     {
       question: "What is the Employment Guarantee Bond?",
-      answer: "The Employment Guarantee Bond is a €1,000 deposit that secures your place in the program and demonstrates your commitment. It is fully refundable after completing 12 months of successful employment with Sofitel Frankfurt Opera. This bond helps us maintain the quality of our program and ensures that participants are serious about their career development."
+      answer: "The Employment Guarantee Bond is a €1,000 deposit that secures your place in the program and demonstrates your commitment. It is fully refundable after completing 12 months of successful employment with Sofitel Frankfurt Opera. This bond helps us maintain the quality of our program and ensures that participants are serious about their career development. The bond can be paid via bank transfer or credit card after your application is accepted."
+    },
+    {
+      question: "What happens to my Employment Guarantee Bond if I leave early?",
+      answer: "If you voluntarily leave the program before completing 12 months of employment, the bond will not be refunded. This policy exists to ensure commitment to the program and to cover the significant investment we make in training, visa processing, and relocation support. However, if departure is due to circumstances beyond your control (such as serious health issues), we review each case individually."
     },
     {
       question: "What kind of visa assistance is provided?",
