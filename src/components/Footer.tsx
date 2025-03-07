@@ -30,11 +30,6 @@ export const Footer = () => {
                   Meetings & Events
                 </a>
               </li>
-              <li>
-                <Link to="/travel-professionals" className="text-muted-foreground hover:text-primary transition-colors">
-                  Travel professionals
-                </Link>
-              </li>
             </ul>
           </div>
 
