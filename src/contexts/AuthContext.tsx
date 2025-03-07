@@ -76,15 +76,23 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const fetchUserProfile = async (userId: string) => {
     try {
-      // Need to create a custom table for user_profiles in Supabase
+      // First, check if the table exists by getting the table schema
+      const { data: tableInfo, error: tableError } = await supabase
+        .from('user_profiles')
+        .select('*')
+        .limit(1);
+        
+      // If user_profiles table doesn't exist, try profiles
+      const tableName = (tableError || !tableInfo) ? 'profiles' : 'user_profiles';
+      
       const { data, error } = await supabase
-        .from('profiles')
+        .from(tableName)
         .select('*')
         .eq('id', userId)
         .single();
 
       if (error) {
-        console.error("Error fetching user profile:", error);
+        console.error(`Error fetching user profile from ${tableName}:`, error);
         return;
       }
 
@@ -141,24 +149,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (error) throw error;
       
       if (data.user) {
+        // Check if the table exists by getting the table schema
+        const { data: tableInfo, error: tableError } = await supabase
+          .from('user_profiles')
+          .select('*')
+          .limit(1);
+          
+        // If user_profiles table doesn't exist, use profiles
+        const tableName = (tableError || !tableInfo) ? 'profiles' : 'user_profiles';
+        
         // 2. Create user profile
         const { error: profileError } = await supabase
-          .from('profiles')
-          .insert([
-            {
-              id: data.user.id,
-              full_name: userData.full_name,
-              email: userData.email,
-              country: userData.country,
-              phone: userData.phone,
-              preferred_language: userData.preferred_language,
-            }
-          ]);
+          .from(tableName)
+          .insert({
+            id: data.user.id,
+            full_name: userData.full_name,
+            email: userData.email,
+            country: userData.country,
+            phone: userData.phone,
+            preferred_language: userData.preferred_language,
+          });
           
         if (profileError) {
-          console.error("Error creating profile:", profileError);
+          console.error(`Error creating profile in ${tableName}:`, profileError);
           // If profile creation fails, we should delete the auth user
-          await supabase.auth.admin.deleteUser(data.user.id);
+          // Note: Admin delete is not available in client-side code
           throw profileError;
         }
         
