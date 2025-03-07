@@ -5,6 +5,7 @@ import { JobListingsSection } from "@/components/sections/JobListingsSection";
 import { QuickApplySection } from "@/components/sections/QuickApplySection";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { GoogleMap } from "@/components/GoogleMap";
 import { Helmet } from "react-helmet-async";
 
 const Index = () => {
@@ -28,6 +29,7 @@ const Index = () => {
         <BenefitsSection />
         <JobListingsSection />
         <QuickApplySection />
+        <GoogleMap />
         <Footer />
       </div>
     </div>

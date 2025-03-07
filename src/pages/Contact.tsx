@@ -1,8 +1,11 @@
+
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
+import { GoogleMap } from "@/components/GoogleMap";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+
 const Contact = () => {
   return <div className="min-h-screen bg-background">
       <Helmet>
@@ -62,7 +65,9 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      <GoogleMap />
       <Footer />
     </div>;
 };
+
 export default Contact;

@@ -8,6 +8,7 @@ import { ApplicationSection } from "@/components/development-program/Application
 import { ProgramBenefits } from "@/components/development-program/ProgramBenefits";
 import { FAQ } from "@/components/development-program/FAQ";
 import { CTASection } from "@/components/development-program/CTASection";
+import { GoogleMap } from "@/components/GoogleMap";
 import { Helmet } from "react-helmet-async";
 
 const DevelopmentProgram = () => {
@@ -34,6 +35,7 @@ const DevelopmentProgram = () => {
         <ProgramBenefits />
         <FAQ />
         <CTASection />
+        <GoogleMap />
         <Footer />
       </div>
     </div>
