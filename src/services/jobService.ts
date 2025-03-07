@@ -8,24 +8,56 @@ import {
   ensureEmploymentType 
 } from "@/types/job";
 
+// Type for our database tables that aren't yet reflected in the types.ts file
+type Tables = {
+  jobs: {
+    id: string;
+    title: string;
+    department: string;
+    location: string;
+    employment_type: string;
+    salary_range: string | null;
+    requirements: string[];
+    description: string;
+    posted_date: string;
+    is_active: boolean;
+  };
+  job_applications: {
+    id: string;
+    job_id: string;
+    full_name: string;
+    email: string;
+    phone: string;
+    cover_letter: string;
+    status: string;
+    created_at: string;
+  };
+  analytics: {
+    id: string;
+    event_type: string;
+    event_data: any;
+    created_at: string;
+  };
+}
+
 // Job Listings
 export const getJobs = async (): Promise<Job[]> => {
   try {
     const { data, error } = await supabase
       .from('jobs')
       .select('*')
-      .order('posted_date', { ascending: false });
+      .order('posted_date', { ascending: false }) as { data: Tables['jobs'][] | null, error: any };
     
     if (error) throw error;
     
     // Format the data to match our Job interface with proper type checking
-    return data.map((job) => ({
+    return (data || []).map((job) => ({
       id: job.id,
       title: job.title,
       department: ensureDepartment(job.department),
       location: ensureLocation(job.location),
       employmentType: ensureEmploymentType(job.employment_type),
-      salaryRange: job.salary_range,
+      salaryRange: job.salary_range || '',
       requirements: job.requirements,
       description: job.description,
       postedDate: new Date(job.posted_date).toISOString().split('T')[0],
@@ -43,9 +75,10 @@ export const getJobById = async (id: string): Promise<Job | null> => {
       .from('jobs')
       .select('*')
       .eq('id', id)
-      .single();
+      .single() as { data: Tables['jobs'] | null, error: any };
     
     if (error) throw error;
+    if (!data) return null;
     
     return {
       id: data.id,
@@ -53,7 +86,7 @@ export const getJobById = async (id: string): Promise<Job | null> => {
       department: ensureDepartment(data.department),
       location: ensureLocation(data.location),
       employmentType: ensureEmploymentType(data.employment_type),
-      salaryRange: data.salary_range,
+      salaryRange: data.salary_range || '',
       requirements: data.requirements,
       description: data.description,
       postedDate: new Date(data.posted_date).toISOString().split('T')[0],
@@ -86,14 +119,14 @@ export const submitJobApplication = async (application: JobApplication): Promise
           status: 'pending'
         }
       ])
-      .select();
+      .select() as { data: Tables['job_applications'][] | null, error: any };
     
     if (error) throw error;
     
     return { 
       success: true, 
       message: 'Application submitted successfully', 
-      id: data[0].id 
+      id: data && data[0] ? data[0].id : undefined 
     };
   } catch (error) {
     console.error('Error submitting application:', error);
@@ -114,7 +147,7 @@ export const logAnalyticsEvent = async (eventType: string, eventData: any): Prom
           event_type: eventType,
           event_data: eventData
         }
-      ]);
+      ]) as { data: any, error: any };
   } catch (error) {
     console.error('Error logging analytics event:', error);
   }
@@ -134,7 +167,7 @@ export const seedInitialJobs = async (jobs: Omit<Job, 'id' | 'is_active'>[]): Pr
     // Check if we already have jobs
     const { count, error: countError } = await supabase
       .from('jobs')
-      .select('*', { count: 'exact', head: true });
+      .select('*', { count: 'exact', head: true }) as { count: number | null, error: any };
     
     if (countError) throw countError;
     
@@ -155,7 +188,7 @@ export const seedInitialJobs = async (jobs: Omit<Job, 'id' | 'is_active'>[]): Pr
       
       const { error } = await supabase
         .from('jobs')
-        .insert(jobsToInsert);
+        .insert(jobsToInsert) as { data: any, error: any };
       
       if (error) throw error;
       
