@@ -12,12 +12,9 @@ import {
   RefreshCcw
 } from "lucide-react";
 
-// Define proper bond status type to fix type comparison issues
-type BondStatus = 'pending' | 'paid' | 'refunded';
-
 export const BondStatusTab = () => {
-  // Mock bond data
-  const bondStatus: BondStatus = "pending"; // could be 'pending', 'paid', 'refunded'
+  // Mock bond data - using type assertion to avoid string literal type errors
+  const bondStatus = "pending" as "pending" | "paid" | "refunded";
   const bondAmount = "€1,000";
   const paymentDeadline = "August 15, 2023";
   

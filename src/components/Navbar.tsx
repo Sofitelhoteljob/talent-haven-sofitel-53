@@ -1,14 +1,22 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -33,6 +41,9 @@ export const Navbar = () => {
             <Link to="/development-program" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               Development Program
             </Link>
+            <Link to="/dashboard" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
+              Candidate Dashboard
+            </Link>
             <a 
               href="https://sofitel.accor.com/en/discover-sofitel.html" 
               target="_blank" 
@@ -45,6 +56,21 @@ export const Navbar = () => {
               Contact
             </Link>
           </nav>
+
+          {/* Profile/Logout Button (Desktop) */}
+          {user && (
+            <div className="hidden md:flex items-center space-x-4">
+              <Button 
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="flex items-center gap-2"
+              >
+                <LogOut size={16} className="mr-1" />
+                Logout
+              </Button>
+            </div>
+          )}
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -79,6 +105,13 @@ export const Navbar = () => {
               >
                 Development Program
               </Link>
+              <Link 
+                to="/dashboard" 
+                className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Candidate Dashboard
+              </Link>
               <a 
                 href="https://sofitel.accor.com/en/discover-sofitel.html"
                 target="_blank"
@@ -95,6 +128,18 @@ export const Navbar = () => {
               >
                 Contact
               </Link>
+              
+              {/* Logout button in mobile menu */}
+              {user && (
+                <Button 
+                  variant="outline"
+                  className="mt-2 w-full flex items-center justify-center"
+                  onClick={handleLogout}
+                >
+                  <LogOut size={16} className="mr-2" />
+                  Logout
+                </Button>
+              )}
             </nav>
           </div>
         </div>
