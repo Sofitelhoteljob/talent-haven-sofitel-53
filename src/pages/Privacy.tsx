@@ -8,17 +8,26 @@ const Privacy = () => {
   return (
     <>
       <Helmet>
-        <title>Privacy Policy | Sofitel Frankfurt Opera</title>
+        <title>Privacy Policy | Sofitel Frankfurt Opera - Data Protection Information</title>
         <meta 
           name="description" 
-          content="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information."
+          content="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us."
         />
+        <meta 
+          name="keywords" 
+          content="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy"
+        />
+        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="30 days" />
+        <meta name="author" content="Sofitel Frankfurt Opera" />
       </Helmet>
       <SocialMediaCards 
-        title="Privacy Policy | Sofitel Frankfurt Opera"
-        description="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information."
+        title="Privacy Policy | Sofitel Frankfurt Opera - Data Protection Information"
+        description="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us."
         image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png"
         url="/privacy"
+        keywords="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy"
       />
 
       <Navbar />

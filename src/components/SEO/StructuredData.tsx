@@ -1,6 +1,8 @@
 
+import React from 'react';
+
 interface StructuredDataProps {
-  type: 'Organization' | 'JobPosting' | 'FAQPage' | 'Hotel';
+  type: 'Organization' | 'JobPosting' | 'FAQPage' | 'Hotel' | 'BreadcrumbList' | 'Event';
   data: Record<string, any>;
 }
 

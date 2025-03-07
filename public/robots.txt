@@ -2,5 +2,12 @@
 User-agent: *
 Allow: /
 
+# Block access to sensitive areas (if any)
+Disallow: /admin
+Disallow: /private
+
 # Sitemap location
 Sitemap: https://sofitel-frankfurt-careers.com/sitemap.xml
+
+# Crawl delay to prevent server overload
+Crawl-delay: 10

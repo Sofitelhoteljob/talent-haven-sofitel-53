@@ -1,22 +1,48 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+                            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://sofitel-frankfurt-careers.com/</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://sofitel-frankfurt-careers.com/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png</image:loc>
+      <image:title>Sofitel Frankfurt Opera Careers</image:title>
+      <image:caption>Luxury hospitality careers at Sofitel Frankfurt Opera</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://sofitel-frankfurt-careers.com/development-program</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2024-04-01</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://sofitel-frankfurt-careers.com/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png</image:loc>
+      <image:title>Global Talent Program</image:title>
+      <image:caption>Develop your international career in luxury hospitality</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://sofitel-frankfurt-careers.com/contact</loc>
-    <lastmod>2023-09-15</lastmod>
+    <lastmod>2024-04-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://sofitel-frankfurt-careers.com/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png</image:loc>
+      <image:title>Contact Sofitel Frankfurt Opera</image:title>
+      <image:caption>Get in touch with our recruitment team</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://sofitel-frankfurt-careers.com/privacy</loc>
+    <lastmod>2023-07-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
