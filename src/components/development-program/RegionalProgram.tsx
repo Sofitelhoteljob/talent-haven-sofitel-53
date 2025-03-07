@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChevronDown, ChevronUp, User } from "lucide-react";
+import { ChevronDown, ChevronUp, User, Globe } from "lucide-react";
 import { ImageLoader } from "@/components/ui/image-loader";
 
 interface CountryInfo {
@@ -114,7 +114,7 @@ export const RegionalProgram = ({
                     </ul>
                   </div>
 
-                  {detailedInfo && region === "Africa" && (
+                  {detailedInfo && (region === "Africa" || region === "America") && (
                     <div className="mt-6">
                       <Button 
                         variant="outline"
@@ -151,8 +151,11 @@ export const RegionalProgram = ({
                               <div className="space-y-4">
                                 {detailedInfo.targetCountries.map((country, index) => (
                                   <div key={index} className="bg-white p-3 rounded-md shadow-sm">
-                                    <h5 className="font-medium">{country.name}</h5>
-                                    <p className="text-sm font-medium text-secondary">{country.focus}</p>
+                                    <div className="flex items-center">
+                                      <Globe className="h-4 w-4 text-secondary mr-2" />
+                                      <h5 className="font-medium">{country.name}</h5>
+                                    </div>
+                                    <p className="text-sm font-medium text-secondary mt-1">{country.focus}</p>
                                     <ul className="list-disc pl-5 text-muted-foreground mt-2 text-sm">
                                       {country.initiatives.map((initiative, idx) => (
                                         <li key={idx}>{initiative}</li>

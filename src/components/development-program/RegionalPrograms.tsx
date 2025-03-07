@@ -1,3 +1,4 @@
+
 import { Badge } from "@/components/ui/badge";
 import { RegionalProgram } from "./RegionalProgram";
 
@@ -86,7 +87,60 @@ export const RegionalPrograms = () => {
         "German language courses and cultural orientation",
         "Cross-cultural hospitality management training",
         "International networking opportunities within Accor"
-      ]
+      ],
+      detailedInfo: {
+        vision: "To foster cultural exchange and professional growth by empowering individuals from South America to excel in luxury hospitality while promoting sustainable practices.",
+        coreValues: ["Cultural diversity and inclusion", "Environmental responsibility", "Workforce empowerment and innovation"],
+        targetCountries: [
+          {
+            name: "Brazil",
+            focus: "Environmental sustainability and cultural preservation",
+            initiatives: [
+              "Training on green hospitality practices, such as energy efficiency and waste reduction",
+              "Partnerships with local organizations focused on rainforest conservation",
+              "Opportunities for participants to showcase Brazilian traditions at Sofitel Frankfurt Opera"
+            ]
+          },
+          {
+            name: "Colombia",
+            focus: "Workforce development and peacebuilding through tourism",
+            initiatives: [
+              "Collaboration with vocational training centers in underserved areas",
+              "Programs to empower women and youth affected by conflict",
+              "Celebrating Colombian art, coffee culture, and music within the Sofitel brand"
+            ]
+          },
+          {
+            name: "Argentina",
+            focus: "Culinary arts and cultural diplomacy",
+            initiatives: [
+              "Training modules on gourmet cuisine and wine pairing",
+              "Promoting Argentine traditions, such as tango and mate culture, at Sofitel Frankfurt Opera",
+              "Encouraging participants to act as cultural ambassadors for their home country"
+            ]
+          }
+        ],
+        successStories: [
+          {
+            name: "Maria from Brazil",
+            background: "Grew up in a rural community near the Amazon rainforest, passionate about environmental conservation",
+            journey: "Joined the program after completing a course in sustainable tourism",
+            outcome: "Now works as a Sustainability Coordinator at Sofitel Frankfurt Opera and advocates for eco-friendly practices in the hospitality industry"
+          },
+          {
+            name: "Juan from Colombia",
+            background: "Affected by conflict in his hometown, sought opportunities to rebuild his life",
+            journey: "Trained in hospitality and leadership skills through the program",
+            outcome: "Leads cultural workshops for colleagues and guests, showcasing Colombian traditions and promoting peacebuilding through tourism"
+          },
+          {
+            name: "Sofia from Argentina",
+            background: "A talented chef with a passion for Argentine cuisine",
+            journey: "Joined the program to gain international experience in luxury hospitality",
+            outcome: "Now heads the culinary team at Sofitel Frankfurt Opera, introducing guests to authentic Argentine flavors and traditions"
+          }
+        ]
+      }
     },
     {
       region: "Asia",
