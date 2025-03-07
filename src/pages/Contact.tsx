@@ -5,8 +5,28 @@ import { Button } from "@/components/ui/button";
 import { GoogleMap } from "@/components/GoogleMap";
 import { MapPin, Mail, Phone } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { StructuredData } from "@/components/SEO/StructuredData";
 
 const Contact = () => {
+  const hotelData = {
+    name: "Sofitel Frankfurt Opera",
+    image: "/lovable-uploads/98647a09-12e4-4c6d-9040-a33dec47dc88.png",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Opernplatz 16",
+      addressLocality: "Frankfurt am Main",
+      postalCode: "60313",
+      addressCountry: "DE"
+    },
+    telephone: "+4915210840824",
+    email: "Jobssofitelfrankfurtopera@gmail.com",
+    amenityFeature: {
+      "@type": "LocationFeatureSpecification",
+      name: "Career Opportunities",
+      value: true
+    }
+  };
+
   return <div className="min-h-screen bg-background">
       <Helmet>
         <title>Contact Us | Sofitel Frankfurt Opera Careers</title>
@@ -19,7 +39,14 @@ const Contact = () => {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="canonical" href="https://sofitel-frankfurt-careers.com/contact" />
+        
+        {/* Additional SEO meta tags */}
+        <meta name="robots" content="index, follow" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="author" content="Sofitel Frankfurt Opera" />
       </Helmet>
+      <StructuredData type="Hotel" data={hotelData} />
       <Navbar />
       <div className="pt-24 pb-16">
         <div className="container mx-auto px-6">
