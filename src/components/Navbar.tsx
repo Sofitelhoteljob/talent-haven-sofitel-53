@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -40,9 +39,6 @@ export const Navbar = () => {
             </Link>
             <Link to="/development-program" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
               Development Program
-            </Link>
-            <Link to="/dashboard" className="text-sm font-medium text-foreground hover:text-secondary transition-colors">
-              Candidate Dashboard
             </Link>
             <a 
               href="https://sofitel.accor.com/en/discover-sofitel.html" 
@@ -104,13 +100,6 @@ export const Navbar = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Development Program
-              </Link>
-              <Link 
-                to="/dashboard" 
-                className="text-sm font-medium text-foreground hover:text-secondary transition-colors py-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Candidate Dashboard
               </Link>
               <a 
                 href="https://sofitel.accor.com/en/discover-sofitel.html"
