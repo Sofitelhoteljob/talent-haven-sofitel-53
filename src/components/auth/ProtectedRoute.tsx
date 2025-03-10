@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
@@ -12,22 +13,23 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // If not loading and no user, redirect to login
     if (!loading && !user) {
-      navigate("/login", { replace: true });
+      // Redirect to login with the intended destination
+      const currentPath = window.location.pathname;
+      navigate(`/login?redirect=${encodeURIComponent(currentPath)}`, { replace: true });
     }
   }, [user, loading, navigate]);
 
-  // If loading, show skeleton
+  // Show skeleton while checking auth status
   if (loading) {
     return <DashboardSkeleton />;
   }
 
-  // If no user (and not redirected yet), show loading
+  // If there's no user and we haven't redirected yet, show loading
   if (!user) {
     return <DashboardSkeleton />;
   }
 
-  // Otherwise, render the children
+  // If we have a user, render the protected content
   return <>{children}</>;
 };

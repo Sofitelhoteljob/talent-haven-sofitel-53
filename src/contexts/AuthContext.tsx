@@ -49,16 +49,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // Create a memoized value to prevent unnecessary re-renders
+  const value = {
+    user,
+    profile,
+    loading,
+    login,
+    signup,
+    logout,
+    resetPassword
+  };
+
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      profile, 
-      loading, 
-      login, 
-      signup, 
-      logout, 
-      resetPassword 
-    }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );
