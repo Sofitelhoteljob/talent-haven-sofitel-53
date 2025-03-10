@@ -1,4 +1,3 @@
-
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ImageLoader } from "@/components/ui/image-loader";
 import {
@@ -88,7 +87,7 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
           {images.map((image, index) => (
             <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
               <div 
-                className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100"
+                className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100"
                 onMouseEnter={() => handleImageVisible(index)}
                 ref={el => imageRefs.current[index] = el}
               >
@@ -97,9 +96,8 @@ export const ImageCarousel = ({ images }: ImageCarouselProps) => {
                     src={image.src}
                     alt={image.alt}
                     loading={index < 3 ? "eager" : "lazy"}
-                    width="400"
-                    height="300"
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-contain hover:scale-105 transition-transform duration-300"
+                    containerClassName="w-full h-full"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-gray-100">
