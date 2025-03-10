@@ -154,6 +154,8 @@ const DevelopmentProgram = () => {
       <StructuredData type="FAQPage" data={faqData} />
       <Navbar />
       <div className="pt-16"> {/* Add padding to account for fixed navbar */}
+        {/* Add semantic H1 heading for SEO - visually hidden but available to screen readers and search engines */}
+        <h1 className="sr-only">Global Talent Program at Sofitel Frankfurt Opera - International Hospitality Career Development</h1>
         <ProgramHero />
         <ProgramOverview />
         <RegionalPrograms />
