@@ -1,34 +1,19 @@
-
 import { Helmet } from "react-helmet-async";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { SocialMediaCards } from "@/components/SEO/SocialMediaCards";
-
 const Privacy = () => {
-  return (
-    <>
+  return <>
       <Helmet>
         <title>Privacy Policy | Sofitel Frankfurt Opera - Data Protection Information</title>
-        <meta 
-          name="description" 
-          content="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us."
-        />
-        <meta 
-          name="keywords" 
-          content="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy"
-        />
+        <meta name="description" content="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us." />
+        <meta name="keywords" content="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="language" content="English" />
         <meta name="revisit-after" content="30 days" />
         <meta name="author" content="Sofitel Frankfurt Opera" />
       </Helmet>
-      <SocialMediaCards 
-        title="Privacy Policy | Sofitel Frankfurt Opera - Data Protection Information"
-        description="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us."
-        image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png"
-        url="/privacy"
-        keywords="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy"
-      />
+      <SocialMediaCards title="Privacy Policy | Sofitel Frankfurt Opera - Data Protection Information" description="Privacy Policy for Sofitel Frankfurt Opera - Learn how we collect, use, and protect your personal information when applying for positions at our luxury hotel. Your data privacy is important to us." image="/lovable-uploads/1352e9d8-a09e-4f71-a975-8b9766e5905f.png" url="/privacy" keywords="Sofitel privacy policy, hotel data protection, privacy information, GDPR compliance, candidate data privacy, job application privacy, personal data handling, Sofitel Frankfurt data policy" />
 
       <Navbar />
       
@@ -37,7 +22,7 @@ const Privacy = () => {
           <h1 className="font-playfair text-3xl md:text-4xl font-bold mb-8 mt-8">Privacy Policy</h1>
           
           <div className="prose max-w-none">
-            <p className="mb-6">Last updated: July 1, 2023</p>
+            <p className="mb-6">Last updated: July 1, 2024</p>
             
             <h2 className="font-playfair text-2xl font-semibold mt-8 mb-4">1. Introduction</h2>
             <p className="mb-4">
@@ -118,8 +103,6 @@ const Privacy = () => {
       </main>
       
       <Footer />
-    </>
-  );
+    </>;
 };
-
 export default Privacy;
