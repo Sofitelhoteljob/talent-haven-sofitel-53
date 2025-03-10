@@ -175,24 +175,6 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
         });
         return;
       }
-
-      // Also forward to WhatsApp as before
-      const message = encodeURIComponent(
-        `*New Global Talent Program Application*\n\n` +
-        `*Personal Information:*\n` +
-        `Full Name: ${formData.fullName}\n` +
-        `Email: ${formData.email}\n` +
-        `Phone: ${formData.phone}\n` +
-        `Country: ${formData.country}\n\n` +
-        `*Program Details:*\n` +
-        `Preferred Program: ${formData.program}\n` +
-        `Hospitality Experience: ${formData.experience}\n\n` +
-        `*Motivation:*\n${formData.motivation}`
-      );
-      
-      // Updated WhatsApp number here
-      const whatsappLink = `https://wa.me/+4915210755346?text=${message}`;
-      window.open(whatsappLink, "_blank");
       
       toast({
         title: "Application Submitted",
