@@ -4,6 +4,25 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { useFormContext } from "./FormContext";
 import { countries } from "@/data/countries";
 
+// List of eligible countries for the program
+const eligibleCountryCodes = [
+  "IN", // India
+  "TH", // Thailand
+  "PH", // Philippines
+  "VN", // Vietnam
+  "BR", // Brazil
+  "CO", // Colombia
+  "AR", // Argentina
+  "UG", // Uganda
+  "ZA", // South Africa
+  "MA"  // Morocco
+];
+
+// Filter countries based on eligibility
+const eligibleCountries = countries.filter(country => 
+  eligibleCountryCodes.includes(country.code)
+);
+
 export const PersonalInfoStep = () => {
   const { formData, errors, handleInputChange, handleSelectChange } = useFormContext();
 
@@ -53,7 +72,7 @@ export const PersonalInfoStep = () => {
             <SelectValue placeholder="Select your country" />
           </SelectTrigger>
           <SelectContent className="max-h-[200px]">
-            {countries.map((country) => (
+            {eligibleCountries.map((country) => (
               <SelectItem key={country.code} value={country.name}>
                 {country.name}
               </SelectItem>
