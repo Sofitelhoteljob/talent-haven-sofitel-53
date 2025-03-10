@@ -1,6 +1,6 @@
-
 import React, { createContext, useContext, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   fullName: string;
@@ -27,6 +27,7 @@ interface FormContextType {
   handleNextStep: () => void;
   handlePrevStep: () => void;
   handleSubmitApplication: (e: React.FormEvent) => void;
+  isSubmitting: boolean;
 }
 
 const FormContext = createContext<FormContextType | undefined>(undefined);
@@ -35,6 +36,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [formStep, setFormStep] = useState(1);
   const { toast } = useToast();
   const [errors, setErrors] = useState<FormErrors>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -134,7 +136,7 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const handleSubmitApplication = (e: React.FormEvent) => {
+  const handleSubmitApplication = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate step 3 (final confirmation)
@@ -147,27 +149,80 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return;
     }
     
-    const message = encodeURIComponent(
-      `*New Global Talent Program Application*\n\n` +
-      `*Personal Information:*\n` +
-      `Full Name: ${formData.fullName}\n` +
-      `Email: ${formData.email}\n` +
-      `Phone: ${formData.phone}\n` +
-      `Country: ${formData.country}\n\n` +
-      `*Program Details:*\n` +
-      `Preferred Program: ${formData.program}\n` +
-      `Hospitality Experience: ${formData.experience}\n\n` +
-      `*Motivation:*\n${formData.motivation}`
-    );
+    setIsSubmitting(true);
     
-    // Updated WhatsApp number here
-    const whatsappLink = `https://wa.me/+4915210755346?text=${message}`;
-    window.open(whatsappLink, "_blank");
-    
-    toast({
-      title: "Application Submitted",
-      description: "Your application information has been sent to our recruitment team via WhatsApp.",
-    });
+    try {
+      // Save to Supabase
+      const { data, error } = await supabase
+        .from('development_program_applications')
+        .insert({
+          full_name: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          country: formData.country,
+          program: formData.program,
+          experience: formData.experience,
+          motivation: formData.motivation
+        })
+        .select();
+      
+      if (error) {
+        console.error("Error submitting application:", error);
+        toast({
+          title: "Submission Failed",
+          description: "There was an error submitting your application. Please try again.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      // Also forward to WhatsApp as before
+      const message = encodeURIComponent(
+        `*New Global Talent Program Application*\n\n` +
+        `*Personal Information:*\n` +
+        `Full Name: ${formData.fullName}\n` +
+        `Email: ${formData.email}\n` +
+        `Phone: ${formData.phone}\n` +
+        `Country: ${formData.country}\n\n` +
+        `*Program Details:*\n` +
+        `Preferred Program: ${formData.program}\n` +
+        `Hospitality Experience: ${formData.experience}\n\n` +
+        `*Motivation:*\n${formData.motivation}`
+      );
+      
+      // Updated WhatsApp number here
+      const whatsappLink = `https://wa.me/+4915210755346?text=${message}`;
+      window.open(whatsappLink, "_blank");
+      
+      toast({
+        title: "Application Submitted",
+        description: "Your application has been submitted successfully. Our team will contact you soon.",
+      });
+      
+      // Reset form after successful submission
+      setFormData({
+        fullName: "",
+        email: "",
+        phone: "",
+        country: "",
+        program: "",
+        experience: "",
+        motivation: ""
+      });
+      
+      // Go back to step 1
+      setFormStep(1);
+      
+    } catch (err) {
+      console.error("Unexpected error:", err);
+      toast({
+        title: "Submission Error",
+        description: "An unexpected error occurred. Please try again later.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -182,7 +237,8 @@ export const FormProvider: React.FC<{ children: React.ReactNode }> = ({ children
         validateStep,
         handleNextStep,
         handlePrevStep,
-        handleSubmitApplication
+        handleSubmitApplication,
+        isSubmitting
       }}
     >
       {children}

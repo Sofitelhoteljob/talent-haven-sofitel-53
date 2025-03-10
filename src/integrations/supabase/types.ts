@@ -30,6 +30,48 @@ export type Database = {
         }
         Relationships: []
       }
+      development_program_applications: {
+        Row: {
+          country: string
+          created_at: string
+          email: string
+          experience: string
+          full_name: string
+          id: string
+          motivation: string
+          phone: string
+          program: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          country: string
+          created_at?: string
+          email: string
+          experience: string
+          full_name: string
+          id?: string
+          motivation: string
+          phone: string
+          program: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          country?: string
+          created_at?: string
+          email?: string
+          experience?: string
+          full_name?: string
+          id?: string
+          motivation?: string
+          phone?: string
+          program?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           cover_letter: string
