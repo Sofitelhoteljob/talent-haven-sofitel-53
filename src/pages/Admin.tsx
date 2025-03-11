@@ -86,10 +86,16 @@ const Admin = () => {
     );
   }
 
-  return isAuthenticated ? (
-    <AdminDashboard onLogout={handleLogout} />
-  ) : (
-    <LoginForm onLoginSuccess={() => setIsAuthenticated(true)} />
+  return (
+    <>
+      {/* Add semantic H1 heading for SEO - visually hidden but available to screen readers and search engines */}
+      <h1 className="sr-only">Sofitel Frankfurt Opera - Admin Dashboard</h1>
+      {isAuthenticated ? (
+        <AdminDashboard onLogout={handleLogout} />
+      ) : (
+        <LoginForm onLoginSuccess={() => setIsAuthenticated(true)} />
+      )}
+    </>
   );
 };
 

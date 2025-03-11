@@ -43,8 +43,8 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-16 pb-10">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-6">
         <DashboardHeader 
           onMenuToggle={() => setMobileMenuOpen(true)}
           onExport={handleExportData}
@@ -75,21 +75,23 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
             <TabsTrigger value="settings">Settings</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="overview">
-            <OverviewTab />
-          </TabsContent>
-          
-          <TabsContent value="users">
-            <UsersTab onExport={handleExportData} />
-          </TabsContent>
-          
-          <TabsContent value="content">
-            <ContentTab onExport={handleExportData} />
-          </TabsContent>
-          
-          <TabsContent value="settings">
-            <SettingsTab />
-          </TabsContent>
+          <div className="space-y-6">
+            <TabsContent value="overview" className="m-0">
+              <OverviewTab />
+            </TabsContent>
+            
+            <TabsContent value="users" className="m-0">
+              <UsersTab onExport={handleExportData} />
+            </TabsContent>
+            
+            <TabsContent value="content" className="m-0">
+              <ContentTab onExport={handleExportData} />
+            </TabsContent>
+            
+            <TabsContent value="settings" className="m-0">
+              <SettingsTab />
+            </TabsContent>
+          </div>
         </Tabs>
       </div>
     </div>

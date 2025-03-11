@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Menu, Download, Upload, LogOut, Settings } from "lucide-react";
+import { Menu, Download, Upload, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useEffect, useState } from "react";
 
@@ -42,7 +42,7 @@ export const DashboardHeader = ({
           <Menu size={24} />
         </Button>
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h1>
+          <h2 className="text-2xl md:text-3xl font-bold">Admin Dashboard</h2>
           {userEmail && (
             <p className="text-sm text-muted-foreground">Logged in as: {userEmail}</p>
           )}
