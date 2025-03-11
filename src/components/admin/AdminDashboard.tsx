@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { toast } from "@/components/ui/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 import { DashboardHeader } from "./DashboardHeader";
 import { MobileMenu } from "./MobileMenu";
 import { OverviewTab } from "./tabs/OverviewTab";
@@ -16,6 +16,7 @@ interface AdminDashboardProps {
 export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("overview");
+  const { toast } = useToast();
 
   const handleExportData = (type: string) => {
     // In a real application, this would call an API to generate the export
